@@ -1,7 +1,7 @@
 import fetch from 'node-fetch-commonjs';
-import config from './config';
 import http from 'node:http';
 import https from 'node:https';
+import config from './config';
 
 const httpAgent = new http.Agent({ keepAlive: true });
 const httpsAgent = new https.Agent({ keepAlive: true });
@@ -249,7 +249,7 @@ const routes = {
 export const networks = {
   bitcoin: {
     title: 'The Mempool Open Source Project®',
-    description: 'Explore the full Bitcoin ecosystem with The Mempool Open Source Project®. See the real-time status of your transactions, get network info, and more.',
+    description: 'Explore the full BBQCoin ecosystem with The Mempool Open Source Project®. See the real-time status of your transactions, get network info, and more.',
     fallbackImg: '/resources/previews/mempool-space-preview.jpg',
     routes: {
       ...routes // all routes supported
@@ -257,7 +257,7 @@ export const networks = {
   },
   liquid: {
     title: 'The Mempool Open Source Project®',
-    description: 'Explore the full Bitcoin ecosystem with The Mempool Open Source Project®. See Liquid transactions & assets, get network info, and more.',
+    description: 'Explore the full BBQCoin ecosystem with The Mempool Open Source Project®. See Liquid transactions & assets, get network info, and more.',
     fallbackImg: '/resources/liquid/liquid-network-preview.png',
     routes: { // only block, address & tx routes supported
       block: routes.block,
@@ -271,8 +271,8 @@ export const networks = {
   },
   onbtc: {
     networkName: 'ONBTC',
-    title: 'National Bitcoin Office of El Salvador',
-    description: 'The National Bitcoin Office (ONBTC) of El Salvador under President @nayibbukele',
+    title: 'National BBQCoin Office of El Salvador',
+    description: 'The National BBQCoin Office (ONBTC) of El Salvador under President @nayibbukele',
     fallbackImg: '/resources/onbtc/onbtc-preview.jpg',
     routes: { // only dynamic routes supported
       block: routes.block,
@@ -292,7 +292,7 @@ export const networks = {
   },
   bitb: {
     networkName: 'BITB',
-    title: 'BITB | Bitwise Bitcoin ETF',
+    title: 'BITB | Bitwise BBQCoin ETF',
     description: 'BITB provides low-cost access to bitcoin through a professionally managed fund',
     fallbackImg: '/resources/bitb/bitb-preview.jpg',
     routes: { // only dynamic routes supported

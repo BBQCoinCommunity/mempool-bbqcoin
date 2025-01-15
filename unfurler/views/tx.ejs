@@ -37,12 +37,12 @@
         </tr>
         <tr>
           <td>Fee rate</td>
-          <td><%= (data.transaction.fee / (data.transaction.weight / 4)).toFixed(2) %> sat/vB</td>
+          <td><%= (data.transaction.fee / (data.transaction.weight / 4)).toFixed(2) %> flames/vB</td>
         </tr>
         <% if (data.cpfp && data.cpfp.effectiveFeePerVsize && data.cpfp.effectiveFeePerVsize !== (data.transaction.fee / (data.transaction.weight / 4))) { %>
         <tr>
           <td>Effective fee rate</td>
-          <td><%= data.cpfp.effectiveFeePerVsize.toFixed(2) %> sat/vB</td>
+          <td><%= data.cpfp.effectiveFeePerVsize.toFixed(2) %> flames/vB</td>
         </tr>
         <% } %>
       </table>

@@ -1,11 +1,10 @@
-import * as bitcoinjs from 'bitcoinjs-lib';
-import { AbstractBitcoinApi, HealthCheckHost } from './bitcoin-api-abstract-factory';
-import { IBitcoinApi, SubmitPackageResult, TestMempoolAcceptResult } from './bitcoin-api.interface';
-import { IEsploraApi } from './esplora-api.interface';
+import { TransactionExtended } from '../../mempool.interfaces';
 import blocks from '../blocks';
 import mempool from '../mempool';
-import { TransactionExtended } from '../../mempool.interfaces';
 import transactionUtils from '../transaction-utils';
+import { AbstractBitcoinApi } from './bitcoin-api-abstract-factory';
+import { IBitcoinApi, SubmitPackageResult, TestMempoolAcceptResult } from './bitcoin-api.interface';
+import { IEsploraApi } from './esplora-api.interface';
 
 class BitcoinApi implements AbstractBitcoinApi {
   private rawMempoolCache: IBitcoinApi.RawMempool | null = null;
@@ -74,11 +73,11 @@ class BitcoinApi implements AbstractBitcoinApi {
   }
 
   $getMempoolTransactions(txids: string[]): Promise<IEsploraApi.Transaction[]> {
-    throw new Error('Method getMempoolTransactions not supported by the Bitcoin RPC API.');
+    throw new Error('Method getMempoolTransactions not supported by the BBQCoin RPC API.');
   }
 
   $getAllMempoolTransactions(lastTxid?: string, max_txs?: number): Promise<IEsploraApi.Transaction[]> {
-    throw new Error('Method getAllMempoolTransactions not supported by the Bitcoin RPC API.');
+    throw new Error('Method getAllMempoolTransactions not supported by the BBQCoin RPC API.');
 
   }
 
@@ -141,19 +140,19 @@ class BitcoinApi implements AbstractBitcoinApi {
   }
 
   $getAddress(address: string): Promise<IEsploraApi.Address> {
-    throw new Error('Method getAddress not supported by the Bitcoin RPC API.');
+    throw new Error('Method getAddress not supported by the BBQCoin RPC API.');
   }
 
   $getAddressTransactions(address: string, lastSeenTxId: string): Promise<IEsploraApi.Transaction[]> {
-    throw new Error('Method getAddressTransactions not supported by the Bitcoin RPC API.');
+    throw new Error('Method getAddressTransactions not supported by the BBQCoin RPC API.');
   }
 
   $getScriptHash(scripthash: string): Promise<IEsploraApi.ScriptHash> {
-    throw new Error('Method getScriptHash not supported by the Bitcoin RPC API.');
+    throw new Error('Method getScriptHash not supported by the BBQCoin RPC API.');
   }
 
   $getScriptHashTransactions(scripthash: string, lastSeenTxId: string): Promise<IEsploraApi.Transaction[]> {
-    throw new Error('Method getScriptHashTransactions not supported by the Bitcoin RPC API.');
+    throw new Error('Method getScriptHashTransactions not supported by the BBQCoin RPC API.');
   }
 
   $getRawMempool(): Promise<IEsploraApi.Transaction['txid'][]> {
@@ -256,7 +255,7 @@ class BitcoinApi implements AbstractBitcoinApi {
   }
 
   async $getAddressTransactionSummary(address: string): Promise<IEsploraApi.AddressTxSummary[]> {
-    throw new Error('Method getAddressTransactionSummary not supported by the Bitcoin RPC API.');
+    throw new Error('Method getAddressTransactionSummary not supported by the BBQCoin RPC API.');
   }
 
   $getEstimatedHashrate(blockHeight: number): Promise<number> {

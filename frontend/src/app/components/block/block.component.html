@@ -135,11 +135,11 @@
       <tr *ngIf="block.extras?.medianFee != undefined">
         <td class="td-width" i18n="block.median-fee">Median fee</td>
         <td>~<app-fee-rate [fee]="block.extras?.medianFee" rounding="1.0-0"></app-fee-rate>
-          <span class="fiat">
+          <!--<span class="fiat">
             <app-fiat [blockConversion]="blockConversion" [value]="block.extras?.medianFee * 140" digitsInfo="1.2-2"
               i18n-ngbTooltip="Transaction fee tooltip" ngbTooltip="Based on average native segwit transaction of 140 vBytes"
               placement="bottom"></app-fiat>
-          </span>
+          </span>-->
         </td>
       </tr>
       <ng-template [ngIf]="fees !== undefined" [ngIfElse]="loadingFees">
@@ -147,9 +147,9 @@
           <td i18n="block.total-fees|Total fees in a block">Total fees</td>
           <td *ngIf="network !== 'liquid' && network !== 'liquidtestnet'; else liquidTotalFees">
             <app-amount [satoshis]="block.extras.totalFees" digitsInfo="1.2-3" [noFiat]="true"></app-amount>
-            <span class="fiat">
+            <!--<span class="fiat">
               <app-fiat [blockConversion]="blockConversion" [value]="block.extras.totalFees" digitsInfo="1.0-0"></app-fiat>
-            </span>
+            </span>-->
           </td>
           <ng-template #liquidTotalFees>
             <td>
@@ -162,9 +162,9 @@
           <td i18n="block.subsidy-and-fees|Total subsidy and fees in a block">Subsidy + fees</td>
           <td>
             <app-amount [satoshis]="block.extras.reward" digitsInfo="1.2-3" [noFiat]="true"></app-amount>
-            <span class="fiat">
+            <!--<span class="fiat">
               <app-fiat [blockConversion]="blockConversion" [value]="(blockSubsidy + fees) * 100000000" digitsInfo="1.0-0"></app-fiat>
-            </span>
+            </span>-->
           </td>
         </tr>
       </ng-template>

@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { MasterPageComponent } from '@components/master-page/master-page.component';
+import { NgModule } from '@angular/core';
+import { ActivatedRouteSnapshot, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
+import { MasterPageComponent } from '@components/master-page/master-page.component';
 
-import { StartComponent } from '@components/start/start.component';
-import { PushTransactionComponent } from '@components/push-transaction/push-transaction.component';
-import { TestTransactionsComponent } from '@components/test-transactions/test-transactions.component';
-import { CalculatorComponent } from '@components/calculator/calculator.component';
 import { BlocksList } from '@components/blocks-list/blocks-list.component';
+import { CalculatorComponent } from '@components/calculator/calculator.component';
+import { FaucetComponent } from '@components/faucet/faucet.component';
+import { PushTransactionComponent } from '@components/push-transaction/push-transaction.component';
 import { RbfList } from '@components/rbf-list/rbf-list.component';
 import { ServerHealthComponent } from '@components/server-health/server-health.component';
 import { ServerStatusComponent } from '@components/server-health/server-status.component';
-import { FaucetComponent } from '@components/faucet/faucet.component'
+import { StartComponent } from '@components/start/start.component';
+import { TestTransactionsComponent } from '@components/test-transactions/test-transactions.component';
 
 const browserWindow = window || {};
 // @ts-ignore
@@ -41,10 +41,6 @@ const routes: Routes = [
         component: TestTransactionsComponent,
       },
       {
-        path: 'about',
-        loadChildren: () => import('@components/about/about.module').then(m => m.AboutModule),
-      },
-      {
         path: 'blocks/:page',
         component: BlocksList,
       },
@@ -55,18 +51,6 @@ const routes: Routes = [
       {
         path: 'rbf',
         component: RbfList,
-      },
-      {
-        path: 'terms-of-service',
-        loadChildren: () => import('@components/terms-of-service/terms-of-service.module').then(m => m.TermsOfServiceModule),
-      },
-      {
-        path: 'privacy-policy',
-        loadChildren: () => import('@components/privacy-policy/privacy-policy.module').then(m => m.PrivacyPolicyModule),
-      },
-      {
-        path: 'trademark-policy',
-        loadChildren: () => import('@components/trademark-policy/trademark-policy.module').then(m => m.TrademarkModule),
       },
       {
         path: 'tx',

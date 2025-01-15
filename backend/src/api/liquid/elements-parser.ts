@@ -1,9 +1,9 @@
+import DB from '../../database';
+import logger from '../../logger';
 import { IBitcoinApi } from '../bitcoin/bitcoin-api.interface';
 import bitcoinClient from '../bitcoin/bitcoin-client';
 import bitcoinSecondClient from '../bitcoin/bitcoin-second-client';
 import { Common } from '../common';
-import DB from '../../database';
-import logger from '../../logger';
 
 const federationChangeAddresses = ['bc1qxvay4an52gcghxq5lavact7r6qe9l4laedsazz8fj2ee2cy47tlqff4aj4', '3EiAcrzq1cELXScc98KeCswGWZaPGceT1d'];
 const auditBlockOffsetWithTip = 1; // Wait for 1 block confirmation before processing the block in the audit process to reduce the risk of reorgs
@@ -162,7 +162,7 @@ class ElementsParser {
           const utxosToParse = await this.$getFederationUtxosToParse(utxos);
           spentAsTip = utxosToParse.spentAsTip;
           unspentAsTip = utxosToParse.unspentAsTip;
-          logger.debug(`Found ${utxos.length} Federation UTXOs and ${redeemAddresses.length} Peg-Out Addresses to scan in Bitcoin block height #${auditProgress.lastBlockAudit} / #${auditProgress.confirmedTip}`);
+          logger.debug(`Found ${utxos.length} Federation UTXOs and ${redeemAddresses.length} Peg-Out Addresses to scan in BBQCoin block height #${auditProgress.lastBlockAudit} / #${auditProgress.confirmedTip}`);
           logger.debug(`${unspentAsTip.length} / ${utxos.length} Federation UTXOs are unspent as of tip`);
         } else { // If the audit status is too far in the past, it is useless and wasteful to look for still unspent txos since they will all be spent as of the tip
           spentAsTip = utxos;
@@ -177,7 +177,7 @@ class ElementsParser {
             if (indexingSpeeds.length > 100) indexingSpeeds.shift(); // Keep the length of the up to 100 last indexing speeds
             const meanIndexingSpeed = indexingSpeeds.reduce((a, b) => a + b, 0) / indexingSpeeds.length;
             const eta = (auditProgress.confirmedTip - auditProgress.lastBlockAudit) / meanIndexingSpeed;
-            logger.debug(`Scanning ${utxos.length} Federation UTXOs and ${redeemAddresses.length} Peg-Out Addresses at Bitcoin block height #${auditProgress.lastBlockAudit} / #${auditProgress.confirmedTip} | ~${meanIndexingSpeed.toFixed(2)} blocks/sec | elapsed: ${(runningFor / 60).toFixed(0)} minutes | ETA: ${(eta / 60).toFixed(0)} minutes`);
+            logger.debug(`Scanning ${utxos.length} Federation UTXOs and ${redeemAddresses.length} Peg-Out Addresses at BBQCoin block height #${auditProgress.lastBlockAudit} / #${auditProgress.confirmedTip} | ~${meanIndexingSpeed.toFixed(2)} blocks/sec | elapsed: ${(runningFor / 60).toFixed(0)} minutes | ETA: ${(eta / 60).toFixed(0)} minutes`);
             timer = Date.now() / 1000;
             indexedThisRun = 0;
           }
@@ -401,7 +401,7 @@ class ElementsParser {
     };
   }
 
-  // Get the current reserves of the federation and the last Bitcoin block it was updated
+  // Get the current reserves of the federation and the last BBQCoin block it was updated
   public async $getCurrentFederationReserves(): Promise<any> {
     const [rows] = await DB.query(`SELECT SUM(amount) AS total_balance FROM federation_txos WHERE unspent = 1 AND expiredAt = 0;`);
     const lastblockaudit = await this.$getLastBlockAudit();

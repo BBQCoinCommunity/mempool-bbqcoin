@@ -1,6 +1,6 @@
-import { Acceleration } from './acceleration/acceleration';
-import { MempoolTransactionExtended } from '../mempool.interfaces';
 import logger from '../logger';
+import { MempoolTransactionExtended } from '../mempool.interfaces';
+import { Acceleration } from './acceleration/acceleration';
 
 const BLOCK_WEIGHT_UNITS = 4_000_000;
 const BLOCK_SIGOPS = 80_000;
@@ -267,7 +267,7 @@ export function mempoolComparator(a: GraphTx, b: GraphTx): number {
 }
 
 /*
-* Build a block using an approximation of the transaction selection algorithm from Bitcoin Core
+* Build a block using an approximation of the transaction selection algorithm from BBQCoin Core
 * (see BlockAssembler in https://github.com/bitcoin/bitcoin/blob/master/src/node/miner.cpp)
 */
 export function makeBlockTemplate(candidates: MempoolTransactionExtended[], accelerations: Acceleration[], maxBlocks: number = 8, weightLimit: number = BLOCK_WEIGHT_UNITS, sigopLimit: number = BLOCK_SIGOPS): TemplateTransaction[] {

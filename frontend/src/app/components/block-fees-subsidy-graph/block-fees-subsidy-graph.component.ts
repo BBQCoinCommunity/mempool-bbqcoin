@@ -1,19 +1,19 @@
+import { formatNumber } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Inject, Input, LOCALE_ID, NgZone, OnInit } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EChartsOption } from '@app/graphs/echarts';
+import { ApiService } from '@app/services/api.service';
+import { MiningService } from '@app/services/mining.service';
+import { SeoService } from '@app/services/seo.service';
+import { StateService } from '@app/services/state.service';
+import { StorageService } from '@app/services/storage.service';
+import { download, formatterXAxis } from '@app/shared/graphs.utils';
+import { FiatCurrencyPipe } from '@app/shared/pipes/fiat-currency.pipe';
+import { FiatShortenerPipe } from '@app/shared/pipes/fiat-shortener.pipe';
+import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
 import { Observable } from 'rxjs';
 import { catchError, map, share, startWith, switchMap, tap } from 'rxjs/operators';
-import { ApiService } from '@app/services/api.service';
-import { SeoService } from '@app/services/seo.service';
-import { formatNumber } from '@angular/common';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { download, formatterXAxis } from '@app/shared/graphs.utils';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FiatShortenerPipe } from '@app/shared/pipes/fiat-shortener.pipe';
-import { FiatCurrencyPipe } from '@app/shared/pipes/fiat-currency.pipe';
-import { StateService } from '@app/services/state.service';
-import { MiningService } from '@app/services/mining.service';
-import { StorageService } from '@app/services/storage.service';
-import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
 
 @Component({
   selector: 'app-block-fees-subsidy-graph',
@@ -76,7 +76,7 @@ export class BlockFeesSubsidyGraphComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.setTitle($localize`:@@41545303ec98792b738d6237adbd1f3b54a22196:Block Fees Vs Subsidy`);
-    this.seoService.setDescription($localize`:@@meta.description.bitcoin.graphs.block-fees-subsidy:See the mining fees earned per Bitcoin block compared to the Bitcoin block subsidy, visualized in BTC and USD over time.`);
+    this.seoService.setDescription($localize`:@@meta.description.bitcoin.graphs.block-fees-subsidy:See the mining fees earned per BBQCoin block compared to the BBQCoin block subsidy, visualized in BTC and USD over time.`);
 
     this.miningWindowPreference = this.miningService.getDefaultTimespan('24h');
     this.radioGroupForm = this.formBuilder.group({ dateSpan: this.miningWindowPreference });

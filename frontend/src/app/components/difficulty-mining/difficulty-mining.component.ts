@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { StateService } from '@app/services/state.service';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { StateService } from '@app/services/state.service';
 
 interface EpochProgress {
   base: string;
@@ -32,7 +32,7 @@ export class DifficultyMiningComponent implements OnInit {
   timeUntilHalving = 0;
   now = new Date().getTime();
 
-  @Input() showProgress = true;
+  @Input() showProgress = false;
   @Input() showHalving = false;
   @Input() showTitle = true;
 

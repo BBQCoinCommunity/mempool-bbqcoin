@@ -1,40 +1,36 @@
 import config from '../config';
-import bitcoinApi, { bitcoinCoreApi } from './bitcoin/bitcoin-api-factory';
-import logger from '../logger';
-import memPool from './mempool';
-import { BlockExtended, BlockExtension, BlockSummary, PoolTag, TransactionExtended, TransactionMinerInfo, CpfpSummary, MempoolTransactionExtended, TransactionClassified, BlockAudit, TransactionAudit } from '../mempool.interfaces';
-import { Common } from './common';
-import diskCache from './disk-cache';
-import transactionUtils from './transaction-utils';
-import bitcoinClient from './bitcoin/bitcoin-client';
-import { IBitcoinApi } from './bitcoin/bitcoin-api.interface';
-import { IEsploraApi } from './bitcoin/esplora-api.interface';
-import poolsRepository from '../repositories/PoolsRepository';
-import blocksRepository from '../repositories/BlocksRepository';
-import loadingIndicators from './loading-indicators';
-import BitcoinApi from './bitcoin/bitcoin-api';
-import BlocksRepository from '../repositories/BlocksRepository';
-import HashratesRepository from '../repositories/HashratesRepository';
 import indexer from '../indexer';
-import poolsParser from './pools-parser';
-import BlocksSummariesRepository from '../repositories/BlocksSummariesRepository';
+import logger from '../logger';
+import { BlockAudit, BlockExtended, BlockExtension, BlockSummary, CpfpSummary, MempoolTransactionExtended, PoolTag, TransactionAudit, TransactionClassified, TransactionExtended, TransactionMinerInfo } from '../mempool.interfaces';
+import AccelerationRepository from '../repositories/AccelerationRepository';
 import BlocksAuditsRepository from '../repositories/BlocksAuditsRepository';
-import cpfpRepository from '../repositories/CpfpRepository';
-import mining from './mining/mining';
+import { default as blocksRepository, default as BlocksRepository } from '../repositories/BlocksRepository';
+import BlocksSummariesRepository from '../repositories/BlocksSummariesRepository';
+import { default as cpfpRepository, default as CpfpRepository } from '../repositories/CpfpRepository';
 import DifficultyAdjustmentsRepository from '../repositories/DifficultyAdjustmentsRepository';
+import HashratesRepository from '../repositories/HashratesRepository';
+import poolsRepository from '../repositories/PoolsRepository';
 import PricesRepository from '../repositories/PricesRepository';
 import priceUpdater from '../tasks/price-updater';
-import chainTips from './chain-tips';
-import websocketHandler from './websocket-handler';
-import redisCache from './redis-cache';
-import rbfCache from './rbf-cache';
-import { calcBitsDifference } from './difficulty-adjustment';
-import AccelerationRepository from '../repositories/AccelerationRepository';
-import { calculateFastBlockCpfp, calculateGoodBlockCpfp } from './cpfp';
-import mempool from './mempool';
-import CpfpRepository from '../repositories/CpfpRepository';
-import accelerationApi from './services/acceleration';
 import { parseDATUMTemplateCreator } from '../utils/bitcoin-script';
+import BitcoinApi from './bitcoin/bitcoin-api';
+import bitcoinApi, { bitcoinCoreApi } from './bitcoin/bitcoin-api-factory';
+import { IBitcoinApi } from './bitcoin/bitcoin-api.interface';
+import bitcoinClient from './bitcoin/bitcoin-client';
+import { IEsploraApi } from './bitcoin/esplora-api.interface';
+import chainTips from './chain-tips';
+import { Common } from './common';
+import { calculateFastBlockCpfp, calculateGoodBlockCpfp } from './cpfp';
+import { calcBitsDifference } from './difficulty-adjustment';
+import diskCache from './disk-cache';
+import loadingIndicators from './loading-indicators';
+import { default as memPool, default as mempool } from './mempool';
+import mining from './mining/mining';
+import poolsParser from './pools-parser';
+import rbfCache from './rbf-cache';
+import redisCache from './redis-cache';
+import transactionUtils from './transaction-utils';
+import websocketHandler from './websocket-handler';
 
 class Blocks {
   private blocks: BlockExtended[] = [];
@@ -1141,12 +1137,12 @@ class Blocks {
       return blockByHash;
     }
 
-    // Not Bitcoin network, return the block as it from the bitcoin backend
+    // Not BBQCoin network, return the block as it from the bitcoin backend
     if (['mainnet', 'testnet', 'signet'].includes(config.MEMPOOL.NETWORK) === false) {
       return await bitcoinCoreApi.$getBlock(hash);
     }
 
-    // Bitcoin network, add our custom data on top
+    // BBQCoin network, add our custom data on top
     const block: IEsploraApi.Block = await bitcoinApi.$getBlock(hash);
     if (block.stale) {
       return await this.$indexStaleBlock(hash);

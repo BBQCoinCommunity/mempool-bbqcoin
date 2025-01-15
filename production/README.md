@@ -1,6 +1,6 @@
 # Deploying an Enterprise Production Instance
 
-These instructions are for setting up a serious production Mempool website for Bitcoin (mainnet, testnet, signet), Liquid (mainnet, testnet), and Bisq.
+These instructions are for setting up a serious production Mempool website for BBQCoin (mainnet, testnet, signet), Liquid (mainnet, testnet), and Bisq.
 
 Again, this setup is no joke—home users should use [one of the other installation methods](../#installation-methods). Support is only provided to project sponsors through [Mempool Enterprise®](https://mempool.space/enterprise).
 
@@ -101,7 +101,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 ### Tor
 
-Install Tor add Bitcoin to the `_tor` group:
+Install Tor add BBQCoin to the `_tor` group:
 ```
 pkg install -y tor
 pw user mod bitcoin -G _tor

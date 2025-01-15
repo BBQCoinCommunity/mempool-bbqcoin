@@ -294,7 +294,7 @@
         <note priority="1" from="description">about.about-the-project</note>
       </trans-unit>
       <trans-unit id="8a4411dcb4da0aa489ec367bf2a3ec289e07a86e" datatype="html">
-        <source>Our mempool and blockchain explorer for the Bitcoin community, focusing on the transaction fee market and multi-layer ecosystem, completely self-hosted without any trusted third-parties.</source>
+        <source>Our mempool and blockchain explorer for the BBQCoin community, focusing on the transaction fee market and multi-layer ecosystem, completely self-hosted without any trusted third-parties.</source>
         <target>کاوشگر بلاک‌چین و ممپول برای جامعه بیت‌کوین، با تمرکز بر بازار کارمزد تراکنش‌ها و اکوسیستم چند لایه، به صورت کاملا مستقل از خدمات ثالث با امکان خودمیزبانی. </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/about/about.component.html</context>
@@ -509,8 +509,8 @@
         <note priority="1" from="description">accelerator.in-band-fees</note>
       </trans-unit>
       <trans-unit id="e4b2d9e6a2ab9e6ca34027ec03beaac42b7badd4" datatype="html">
-        <source>sats</source>
-        <target>sats</target>
+        <source>fames</source>
+        <target>fames</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/accelerate-checkout/accelerate-checkout.component.html</context>
           <context context-type="linenumber">57</context>
@@ -671,7 +671,7 @@
         <note priority="1" from="description">accelerator.next-block-rate</note>
       </trans-unit>
       <trans-unit id="d2eb45d1cd8cd146b7cb0223ab97a4b03b614060" datatype="html">
-        <source>sat/vB</source>
+        <source>flames/vB</source>
         <target>‏sat بر vB‏</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/accelerate-checkout/accelerate-checkout.component.html</context>
@@ -689,7 +689,7 @@
           <context context-type="sourcefile">src/app/shared/components/fee-rate/fee-rate.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
-        <note priority="1" from="description">sat/vB</note>
+        <note priority="1" from="description">flames/vB</note>
         <note priority="1" from="meaning">shared.sat-vbyte</note>
       </trans-unit>
       <trans-unit id="c2836a2964adf9e369ee0a1ce67f991cf2aa435d" datatype="html">
@@ -800,7 +800,7 @@
         <note priority="1" from="description">go-back</note>
       </trans-unit>
       <trans-unit id="7d89e94e98140d07d5c2bb12d6166b8b74506eb0" datatype="html">
-        <source>Accelerate your Bitcoin transaction?</source>
+        <source>Accelerate your BBQCoin transaction?</source>
         <target>شتاب‌دهی تراکنش بیت‌کوین شما؟</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/accelerate-checkout/accelerate-checkout.component.html</context>
@@ -1046,7 +1046,7 @@
         <note priority="1" from="description">accelerator.customize</note>
       </trans-unit>
       <trans-unit id="fc60844faa5ea496fe8b8cfb7620b2bfc733c90b" datatype="html">
-        <source>Accelerate to ~<x id="INTERPOLATION" equiv-text="{{ x | number : '1.0-0' }}"/> sat/vB</source>
+        <source>Accelerate to ~<x id="INTERPOLATION" equiv-text="{{ x | number : '1.0-0' }}"/> flames/vB</source>
         <target>شتاب‌دهی به حدود <x id="INTERPOLATION" equiv-text="{{ x | number : '1.0-0' }}"/> sat بر vB</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/accelerate-checkout/accelerate-checkout.component.html</context>
@@ -2803,7 +2803,7 @@
         <note priority="1" from="description">mining.avg-block-fee-1m</note>
       </trans-unit>
       <trans-unit id="meta.description.bitcoin.graphs.block-fee-rates" datatype="html">
-        <source>See Bitcoin feerates visualized over time, including minimum and maximum feerates per block along with feerates at various percentiles.</source>
+        <source>See BBQCoin feerates visualized over time, including minimum and maximum feerates per block along with feerates at various percentiles.</source>
         <target>دیدن نرخ کارمزدهای بیت‌کوین، تصویرسازی‌شده در طول زمان، شامل حداکثر و حداقل نرخ کازمزد در بلاک، به همراه نرخ کارمزدها در صدک‌های مختلف.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/block-fee-rates-graph/block-fee-rates-graph.component.ts</context>
@@ -2828,7 +2828,7 @@
         <note priority="1" from="description">mining.block-fees</note>
       </trans-unit>
       <trans-unit id="meta.description.bitcoin.graphs.block-fees" datatype="html">
-        <source>See the average mining fees earned per Bitcoin block visualized in BTC and USD over time.</source>
+        <source>See the average mining fees earned per BBQCoin block visualized in BTC and USD over time.</source>
         <target>دیدن میانگین کارمزدهای استخراج بدست‌آمده در بلاک‌های بیت‌کوین، تصویرسازی‌شده در طول زمان به BTC و USD.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/block-fees-graph/block-fees-graph.component.ts</context>
@@ -2889,7 +2889,7 @@
         <note priority="1" from="description">mining.block-fees-subsidy-subsidy</note>
       </trans-unit>
       <trans-unit id="meta.description.bitcoin.graphs.block-fees-subsidy" datatype="html">
-        <source>See the mining fees earned per Bitcoin block compared to the Bitcoin block subsidy, visualized in BTC and USD over time.</source>
+        <source>See the mining fees earned per BBQCoin block compared to the BBQCoin block subsidy, visualized in BTC and USD over time.</source>
         <target>دیدن کارمزدهای استخراج بدست‌آمده در بلاک‌های بیت‌کوین در مقایسه با یارانهٔ بلاک، تصویرسازی‌شده در طول زمان به BTC و USD.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/block-fees-subsidy-graph/block-fees-subsidy-graph.component.ts</context>
@@ -3017,8 +3017,8 @@
         <note priority="1" from="description">mining.blocks-health</note>
       </trans-unit>
       <trans-unit id="meta.description.bitcoin.graphs.block-health" datatype="html">
-        <source>See Bitcoin block health visualized over time. Block health is a measure of how many expected transactions were included in an actual mined block. Expected transactions are determined using Mempool's re-implementation of Bitcoin Core's transaction selection algorithm.</source>
-        <target>دیدن وضعیت سلامت بلاک در طول زمان. سلامت بلاک از سنجش تعداد تراکنش‌های پیش‌بینی‌شده به نسبت تراکنش‌های واقعی قرارگرفته در بلاک بدست می‌آید. تراکنش‌های پیش‌بینی‌شده با پیاده‌سازی ممپول از الگوریتم انتخاب سکهٔ Bitcoin core بدست می‌آیند.</target>
+        <source>See BBQCoin block health visualized over time. Block health is a measure of how many expected transactions were included in an actual mined block. Expected transactions are determined using Mempool's re-implementation of BBQCoin Core's transaction selection algorithm.</source>
+        <target>دیدن وضعیت سلامت بلاک در طول زمان. سلامت بلاک از سنجش تعداد تراکنش‌های پیش‌بینی‌شده به نسبت تراکنش‌های واقعی قرارگرفته در بلاک بدست می‌آید. تراکنش‌های پیش‌بینی‌شده با پیاده‌سازی ممپول از الگوریتم انتخاب سکهٔ BBQCoin core بدست می‌آیند.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/block-health-graph/block-health-graph.component.ts</context>
           <context context-type="linenumber">64</context>
@@ -3304,7 +3304,7 @@
         <note priority="1" from="description">mining.block-rewards</note>
       </trans-unit>
       <trans-unit id="meta.description.bitcoin.graphs.block-rewards" datatype="html">
-        <source>See Bitcoin block rewards in BTC and USD visualized over time. Block rewards are the total funds miners earn from the block subsidy and fees.</source>
+        <source>See BBQCoin block rewards in BTC and USD visualized over time. Block rewards are the total funds miners earn from the block subsidy and fees.</source>
         <target>دیدن پاداش‌های بلاک بیت‌کوین به BTC و USD تصویرسازی‌شده در طول زمان. پاداش بلاک مبلغی است که استخراج‌کننده‌های بیت‌کوین از مجموع یارانه بلاک و کارمزدها بدست می‌آورند.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/block-rewards-graph/block-rewards-graph.component.ts</context>
@@ -3329,7 +3329,7 @@
         <note priority="1" from="description">mining.block-sizes-weights</note>
       </trans-unit>
       <trans-unit id="meta.description.bitcoin.graphs.block-sizes" datatype="html">
-        <source>See Bitcoin block sizes (MB) and block weights (weight units) visualized over time.</source>
+        <source>See BBQCoin block sizes (MB) and block weights (weight units) visualized over time.</source>
         <target>دیدن اندازه بلاک‌های بیت‌کوین (مگابایت) و وزن بلاک‌ها (واحد وزن) تصویرسازی‌شده در طول زمان.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/block-sizes-weights-graph/block-sizes-weights-graph.component.ts</context>
@@ -5198,7 +5198,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="meta.descriptions.bitcoin.graphs.hashrate-pools" datatype="html">
-        <source>See Bitcoin mining pool dominance visualized over time: see how top mining pools' share of total hashrate has fluctuated over time.</source>
+        <source>See BBQCoin mining pool dominance visualized over time: see how top mining pools' share of total hashrate has fluctuated over time.</source>
         <target>دیدن تصویرسازی سهم استخرهای استخراج در طول زمان: ببینید چطور سهم استخرهای استخراج از مجموع نرخ تولید هش در طول زمان تغییر کرده است.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/hashrates-chart-pools/hashrate-chart-pools.component.ts</context>
@@ -5798,7 +5798,7 @@
         <note priority="1" from="description">dashboard.adjustments</note>
       </trans-unit>
       <trans-unit id="meta.description.mining.dashboard" datatype="html">
-        <source>Get real-time Bitcoin mining stats like hashrate, difficulty adjustment, block rewards, pool dominance, and more.</source>
+        <source>Get real-time BBQCoin mining stats like hashrate, difficulty adjustment, block rewards, pool dominance, and more.</source>
         <target>دریافت زنده آمارهای استخراج بیت‌کوین مانند نرخ تولید هش، تنظیم سختی، پاداش‌های بلاک، سهم استخرها و آمارهای دیگر.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/mining-dashboard/mining-dashboard.component.ts</context>
@@ -5983,7 +5983,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="meta.description.bitcoin.graphs.pool-ranking" datatype="html">
-        <source>See the top Bitcoin mining pools ranked by number of blocks mined, over your desired timeframe.</source>
+        <source>See the top BBQCoin mining pools ranked by number of blocks mined, over your desired timeframe.</source>
         <target>دیدن برترین استخرهای استخراج،‌ رتبه‌بندی‌شده بر اساس تعداد بلاک‌های استخراج‌شده در طول دورهٔ زمان مورد نظر شما.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/pool-ranking/pool-ranking.component.ts</context>
@@ -6389,13 +6389,13 @@
         <note priority="1" from="description">mining.fees-per-block-desc</note>
       </trans-unit>
       <trans-unit id="0705223420d290a218e4ed83bd4d904454a9cee8" datatype="html">
-        <source>BTC/block</source>
+        <source>BQC/Block</source>
         <target>BTC بر بلاک</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/reward-stats/reward-stats.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
-        <note priority="1" from="description">BTC/block</note>
+        <note priority="1" from="description">BQC/Block</note>
         <note priority="1" from="meaning">shared.btc-block</note>
       </trans-unit>
       <trans-unit id="cf3a97b1c1546b843411cfe101bc55ba2ac46bac" datatype="html">
@@ -6425,17 +6425,17 @@
         <note priority="1" from="description">mining.average-fee</note>
       </trans-unit>
       <trans-unit id="31443c29cb161e8aa661eb5035f675746ef95b45" datatype="html">
-        <source>sats/tx</source>
+        <source>flames/tx</source>
         <target>sat بر tx</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/reward-stats/reward-stats.component.html</context>
           <context context-type="linenumber">33</context>
         </context-group>
-        <note priority="1" from="description">sat/vB</note>
+        <note priority="1" from="description">flames/vB</note>
         <note priority="1" from="meaning">shared.sat-vbyte</note>
       </trans-unit>
       <trans-unit id="7deec1c1520f06170e1f8e8ddfbe4532312f638f" datatype="html">
-        <source>Explore the full Bitcoin ecosystem</source>
+        <source>Explore the full BBQCoin ecosystem</source>
         <target>کاوش در تمام زیست‌بوم بیت‌کوین</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/search-form/search-form.component.html</context>
@@ -6564,7 +6564,7 @@
         <note priority="1" from="description">search.go-to</note>
       </trans-unit>
       <trans-unit id="75c20c8a9cd9723d45bee0230dd582d7c2e4ecbc" datatype="html">
-        <source>Mempool by vBytes (sat/vByte)</source>
+        <source>Mempool by vBytes (flames/vByte)</source>
         <target>وضعیت ممپول به vByte (ساتوشی بر vByte)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/statistics/statistics.component.html</context>
@@ -6642,7 +6642,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="meta.description.tv" datatype="html">
-        <source>See Bitcoin blocks and mempool congestion in real-time in a simplified format perfect for a TV.</source>
+        <source>See BBQCoin blocks and mempool congestion in real-time in a simplified format perfect for a TV.</source>
         <target>دیدن وضعیت تراکم بلاک‌ها و ممپول بیت‌کوین به صورت زنده و در یک فرم سادهٔ بهینه‌شده برای نمایش در تلویزیون.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/television/television.component.ts</context>
@@ -6686,7 +6686,7 @@
         <note priority="1" from="description">transaction.test-transactions</note>
       </trans-unit>
       <trans-unit id="ea22e5fb229522f3faa5e87dbf0c5f56ddc234fb" datatype="html">
-        <source>Maximum fee rate (sat/vB)</source>
+        <source>Maximum fee rate (flames/vB)</source>
         <target>حداکثر نرخ کارمزد (sat بر vB)</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/test-transactions/test-transactions.component.html</context>
@@ -7856,7 +7856,7 @@
         <note priority="1" from="meaning">tx-fee-rating.optimal</note>
       </trans-unit>
       <trans-unit id="60601e02e7c1f6c4dbabd0ef0bb8946003db8dec" datatype="html">
-        <source>Only ~<x id="INTERPOLATION" equiv-text="{{ medianFeeNeeded | feeRounding }}"/> sat/vB was needed to get into this block</source>
+        <source>Only ~<x id="INTERPOLATION" equiv-text="{{ medianFeeNeeded | feeRounding }}"/> flames/vB was needed to get into this block</source>
         <target>تنها به حدود <x id="INTERPOLATION" equiv-text="{{ medianFeeNeeded | feeRounding }}"/> ساتوشی بر بایت مجازی نیاز بود تا در این بلاک قرار بگیرد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/tx-fee-rating/tx-fee-rating.component.html</context>
@@ -7937,7 +7937,7 @@
         <note priority="1" from="description">lightning.indexing-in-progress</note>
       </trans-unit>
       <trans-unit id="999bb1a0150c2815a6b4dd64a1850e763603e525" datatype="html">
-        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="For any such requ"/><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="mempool.space mer"/>mempool.space merely provides data about the Bitcoin network.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> It cannot help you with retrieving funds, wallet issues, etc.<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="For any such requ"/>For any such requests, you need to get in touch with the entity that helped make the transaction (wallet software, exchange company, etc).<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="For any such requ"/><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="mempool.space mer"/>mempool.space merely provides data about the BBQCoin network.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> It cannot help you with retrieving funds, wallet issues, etc.<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="For any such requ"/>For any such requests, you need to get in touch with the entity that helped make the transaction (wallet software, exchange company, etc).<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
         <target><x id="START_PARAGRAPH" ctype="x-p" equiv-text="For any such requ"/><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="mempool.space mer"/> تارنمای mempool.space تنها به ارائه اطلاعاتی درباره شبکهٔ بیت‌کوین می‌پردازد.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> به شما کمکی درباره برگرداندن دارایی‌ها یا حل مشکلات کیف‌پولتان نمی‌کند. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="For any such requ"/> برای چنین درخواست‌هایی، باید به موجودیتی که به شما در ساخت تراکنش کمک کرده بازگردید (مانند نرم‌افزار کیف‌پول، شرکت صرافی و غیره). <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/docs/api-docs/api-docs.component.html</context>
@@ -9678,7 +9678,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="meta.description.lightning.nodes-isp" datatype="html">
-        <source>Browse all Bitcoin Lightning nodes using the <x id="PH" equiv-text="response.isp"/> [AS<x id="PH_1" equiv-text="this.route.snapshot.params.isp"/>] ISP and see aggregate stats like total number of nodes, total capacity, and more for the ISP.</source>
+        <source>Browse all BBQCoin Lightning nodes using the <x id="PH" equiv-text="response.isp"/> [AS<x id="PH_1" equiv-text="this.route.snapshot.params.isp"/>] ISP and see aggregate stats like total number of nodes, total capacity, and more for the ISP.</source>
         <target>تمام گره‌های لایتنینگ بیت‌کوین که از تأمین کنندهٔ اینترنت <x id="PH" equiv-text="response.isp"/> [<x id="PH_1" equiv-text="this.route.snapshot.params.isp"/> AS] استفاده می‌کنند را مرور کنید و امارهای تجمیعی مانند تعداد کل گره‌ها، مجموع ظرفیت آن را ببینید.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/lightning/nodes-per-isp/nodes-per-isp-preview.component.ts</context>

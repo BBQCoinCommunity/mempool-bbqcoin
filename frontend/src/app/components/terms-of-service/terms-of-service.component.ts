@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Env, StateService } from '@app/services/state.service';
-import { SeoService } from '@app/services/seo.service';
 import { OpenGraphService } from '@app/services/opengraph.service';
+import { SeoService } from '@app/services/seo.service';
+import { StateService } from '@app/services/state.service';
 
 @Component({
   selector: 'app-terms-of-service',
@@ -18,7 +18,7 @@ export class TermsOfServiceComponent {
 
   ngOnInit(): void {
     this.seoService.setTitle('Terms of Service');
-    this.seoService.setDescription('Out of respect for the Bitcoin community, the mempool.space website is Bitcoin Only and does not display any advertising.');
+    this.seoService.setDescription('Out of respect for the BBQCoin community, the mempool.space website is BBQCoin Only and does not display any advertising.');
     this.ogService.setManualOgImage('tos.jpg');
   }
 }

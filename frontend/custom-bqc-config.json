@@ -1,0 +1,37 @@
+{
+  "theme": "bqc",
+  "enterprise": "bqc",
+  "branding": {
+    "name": "bqc",
+    "title": "BQC",
+    "site_id": 19,
+    "header_img": "/resources/bqc-logo.png",
+    "footer_img": "/resources/bqc-logo.png",
+    "rounded_corner": true
+  },
+  "dashboard": {
+    "widgets": [
+      {
+        "component": "fees",
+        "mobileOrder": 1
+      },
+      {
+        "component": "difficulty",
+        "mobileOrder": 2,
+        "halving": false
+      },
+      {
+        "component": "goggles",
+        "mobileOrder": 3
+      },
+      {
+        "component": "incoming",
+        "mobileOrder": 4
+      },
+      {
+        "component": "blocks",
+        "mobileOrder": 6
+      }
+    ]
+  }
+}

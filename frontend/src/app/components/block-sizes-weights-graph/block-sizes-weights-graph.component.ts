@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, LOCALE_ID, OnInit, HostBinding } from '@angular/core';
-import { EChartsOption} from '@app/graphs/echarts';
+import { formatNumber } from '@angular/common';
+import { ChangeDetectionStrategy, Component, HostBinding, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { EChartsOption } from '@app/graphs/echarts';
+import { ApiService } from '@app/services/api.service';
+import { MiningService } from '@app/services/mining.service';
+import { SeoService } from '@app/services/seo.service';
+import { StateService } from '@app/services/state.service';
+import { StorageService } from '@app/services/storage.service';
+import { download, formatterXAxis } from '@app/shared/graphs.utils';
 import { Observable } from 'rxjs';
 import { map, share, startWith, switchMap, tap } from 'rxjs/operators';
-import { ApiService } from '@app/services/api.service';
-import { SeoService } from '@app/services/seo.service';
-import { formatNumber } from '@angular/common';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { StorageService } from '@app/services/storage.service';
-import { MiningService } from '@app/services/mining.service';
-import { ActivatedRoute } from '@angular/router';
-import { download, formatterXAxis } from '@app/shared/graphs.utils';
-import { StateService } from '@app/services/state.service';
 
 @Component({
   selector: 'app-block-sizes-weights-graph',
@@ -62,7 +62,7 @@ export class BlockSizesWeightsGraphComponent implements OnInit {
     let firstRun = true;
 
     this.seoService.setTitle($localize`:@@56fa1cd221491b6478998679cba2dc8d55ba330d:Block Sizes and Weights`);
-    this.seoService.setDescription($localize`:@@meta.description.bitcoin.graphs.block-sizes:See Bitcoin block sizes (MB) and block weights (weight units) visualized over time.`);
+    this.seoService.setDescription($localize`:@@meta.description.bitcoin.graphs.block-sizes:See BBQCoin block sizes (MB) and block weights (weight units) visualized over time.`);
     this.miningWindowPreference = this.miningService.getDefaultTimespan('24h');
     this.radioGroupForm = this.formBuilder.group({ dateSpan: this.miningWindowPreference });
     this.radioGroupForm.controls.dateSpan.setValue(this.miningWindowPreference);

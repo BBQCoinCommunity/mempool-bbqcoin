@@ -1,16 +1,16 @@
-import { Common } from './api/common';
+import bitcoinClient from './api/bitcoin/bitcoin-client';
 import blocks from './api/blocks';
+import { Common } from './api/common';
 import mempool from './api/mempool';
 import mining from './api/mining/mining';
-import logger from './logger';
-import bitcoinClient from './api/bitcoin/bitcoin-client';
-import priceUpdater from './tasks/price-updater';
-import PricesRepository from './repositories/PricesRepository';
 import config from './config';
+import logger from './logger';
 import auditReplicator from './replication/AuditReplication';
 import statisticsReplicator from './replication/StatisticsReplication';
 import AccelerationRepository from './repositories/AccelerationRepository';
 import BlocksAuditsRepository from './repositories/BlocksAuditsRepository';
+import PricesRepository from './repositories/PricesRepository';
+import priceUpdater from './tasks/price-updater';
 
 export interface CoreIndex {
   name: string;
@@ -159,7 +159,7 @@ class Indexer {
       }
     }
 
-    // Do not attempt to index anything unless Bitcoin Core is fully synced
+    // Do not attempt to index anything unless BBQCoin Core is fully synced
     const blockchainInfo = await bitcoinClient.getBlockchainInfo();
     if (blockchainInfo.blocks !== blockchainInfo.headers) {
       return;

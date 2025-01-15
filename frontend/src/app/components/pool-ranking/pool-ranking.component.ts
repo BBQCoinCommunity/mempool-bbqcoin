@@ -1,17 +1,17 @@
-import { ChangeDetectionStrategy, Component, Input, NgZone, OnInit, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, NgZone, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StorageService } from '@app//services/storage.service';
+import { chartColors, poolsColor } from '@app/app.constants';
 import { EChartsOption, PieSeriesOption } from '@app/graphs/echarts';
+import { MiningService, MiningStats } from '@app/services/mining.service';
+import { SeoService } from '@app/services/seo.service';
+import { StateService } from '@app/services/state.service';
+import { isMobile } from '@app/shared/common.utils';
+import { download } from '@app/shared/graphs.utils';
+import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
 import { merge, Observable } from 'rxjs';
 import { map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
-import { SeoService } from '@app/services/seo.service';
-import { StorageService } from '@app//services/storage.service';
-import { MiningService, MiningStats } from '@app/services/mining.service';
-import { StateService } from '@app/services/state.service';
-import { chartColors, poolsColor } from '@app/app.constants';
-import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
-import { download } from '@app/shared/graphs.utils';
-import { isMobile } from '@app/shared/common.utils';
 
 @Component({
   selector: 'app-pool-ranking',
@@ -57,7 +57,7 @@ export class PoolRankingComponent implements OnInit {
       this.miningWindowPreference = '1w';
     } else {
       this.seoService.setTitle($localize`:@@mining.mining-pools:Mining Pools`);
-      this.seoService.setDescription($localize`:@@meta.description.bitcoin.graphs.pool-ranking:See the top Bitcoin mining pools ranked by number of blocks mined, over your desired timeframe.`);
+      this.seoService.setDescription($localize`:@@meta.description.bitcoin.graphs.pool-ranking:See the top BBQCoin mining pools ranked by number of blocks mined, over your desired timeframe.`);
       this.miningWindowPreference = this.miningService.getDefaultTimespan('24h');
     }
     this.radioGroupForm = this.formBuilder.group({ dateSpan: this.miningWindowPreference });

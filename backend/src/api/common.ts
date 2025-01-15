@@ -1,15 +1,15 @@
 import * as bitcoinjs from 'bitcoinjs-lib';
 import { Request } from 'express';
-import { EffectiveFeeStats, MempoolBlockWithTransactions, TransactionExtended, MempoolTransactionExtended, TransactionStripped, WorkingEffectiveFeeStats, TransactionClassified, TransactionFlags } from '../mempool.interfaces';
-import config from '../config';
-import { NodeSocket } from '../repositories/NodesSocketsRepository';
 import { isIP } from 'net';
-import transactionUtils from './transaction-utils';
-import { isPoint } from '../utils/secp256k1';
+import config from '../config';
 import logger from '../logger';
+import { EffectiveFeeStats, MempoolBlockWithTransactions, MempoolTransactionExtended, TransactionClassified, TransactionExtended, TransactionFlags, TransactionStripped, WorkingEffectiveFeeStats } from '../mempool.interfaces';
+import { NodeSocket } from '../repositories/NodesSocketsRepository';
 import { getVarIntLength, opcodes, parseMultisigScript } from '../utils/bitcoin-script';
+import { isPoint } from '../utils/secp256k1';
+import transactionUtils from './transaction-utils';
 
-// Bitcoin Core default policy settings
+// BBQCoin Core default policy settings
 const MAX_STANDARD_TX_WEIGHT = 400_000;
 const MAX_BLOCK_SIGOPS_COST = 80_000;
 const MAX_STANDARD_TX_SIGOPS_COST = (MAX_BLOCK_SIGOPS_COST / 5);

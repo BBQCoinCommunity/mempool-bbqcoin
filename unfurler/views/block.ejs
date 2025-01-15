@@ -32,12 +32,12 @@
           <% if (data.block.extras.feeRange && data.block.extras.feeRange.length) { %>
             <tr>
               <td>Fee span</td>
-              <td><%= (data.block.extras.feeRange[0]).toFixed(2) %> - <%= (data.block.extras.feeRange[data.block.extras.feeRange.length - 1]).toFixed(2) %> sat/vB</td>
+              <td><%= (data.block.extras.feeRange[0]).toFixed(2) %> - <%= (data.block.extras.feeRange[data.block.extras.feeRange.length - 1]).toFixed(2) %> flames/vB</td>
             </tr>
           <% } %>
           <tr>
             <td>Median fee</td>
-            <td><%= (data.block.extras.medianFee).toFixed(2) %> sat/vB</td>
+            <td><%= (data.block.extras.medianFee).toFixed(2) %> flames/vB</td>
           </tr>
           <tr>
             <td>Total fees</td>

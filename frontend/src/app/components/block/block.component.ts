@@ -1,23 +1,23 @@
-import { Component, OnInit, OnDestroy, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 import { Location } from '@angular/common';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-import { ElectrsApiService } from '@app/services/electrs-api.service';
-import { switchMap, tap, throttleTime, catchError, map, shareReplay, startWith, filter, take } from 'rxjs/operators';
-import { Observable, of, Subscription, asyncScheduler, EMPTY, combineLatest, forkJoin } from 'rxjs';
-import { StateService } from '@app/services/state.service';
-import { SeoService } from '@app/services/seo.service';
-import { WebsocketService } from '@app/services/websocket.service';
-import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
-import { Acceleration, BlockAudit, BlockExtended, TransactionStripped } from '@interfaces/node-api.interface';
 import { ApiService } from '@app/services/api.service';
-import { BlockOverviewGraphComponent } from '@components/block-overview-graph/block-overview-graph.component';
-import { detectWebGL } from '@app/shared/graphs.utils';
-import { seoDescriptionNetwork } from '@app/shared/common.utils';
-import { PriceService, Price } from '@app/services/price.service';
 import { CacheService } from '@app/services/cache.service';
-import { ServicesApiServices } from '@app/services/services-api.service';
+import { ElectrsApiService } from '@app/services/electrs-api.service';
 import { PreloadService } from '@app/services/preload.service';
+import { Price, PriceService } from '@app/services/price.service';
+import { SeoService } from '@app/services/seo.service';
+import { ServicesApiServices } from '@app/services/services-api.service';
+import { StateService } from '@app/services/state.service';
+import { WebsocketService } from '@app/services/websocket.service';
+import { seoDescriptionNetwork } from '@app/shared/common.utils';
+import { detectWebGL } from '@app/shared/graphs.utils';
+import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
 import { identifyPrioritizedTransactions } from '@app/shared/transaction.utils';
+import { BlockOverviewGraphComponent } from '@components/block-overview-graph/block-overview-graph.component';
+import { Acceleration, BlockAudit, BlockExtended, TransactionStripped } from '@interfaces/node-api.interface';
+import { asyncScheduler, combineLatest, EMPTY, forkJoin, Observable, of, Subscription } from 'rxjs';
+import { catchError, filter, map, shareReplay, startWith, switchMap, tap, throttleTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-block',
@@ -437,7 +437,7 @@ export class BlockComponent implements OnInit, OnDestroy {
   }
 
   // TODO - Refactor this.fees/this.reward for liquid because it is not
-  // used anymore on Bitcoin networks (we use block.extras directly)
+  // used anymore on BBQCoin networks (we use block.extras directly)
   setBlockSubsidy(): void {
     this.blockSubsidy = 0;
   }

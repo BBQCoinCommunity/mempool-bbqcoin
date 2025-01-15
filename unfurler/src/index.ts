@@ -1,16 +1,15 @@
-import express from "express";
-import { Application, Request, Response, NextFunction } from 'express';
+import express, { Application, NextFunction, Request, Response } from "express";
 import * as http from 'http';
 import * as https from 'https';
-import config from './config';
+import nodejsPath from 'path';
+import { TimeoutError } from "puppeteer";
 import { Cluster } from 'puppeteer-cluster';
 import ReusablePage from './concurrency/ReusablePage';
 import ReusableSSRPage from './concurrency/ReusableSSRPage';
+import config from './config';
 import { parseLanguageUrl } from './language/lang';
-import { matchRoute, networks } from './routes';
-import nodejsPath from 'path';
 import logger from './logger';
-import { TimeoutError } from "puppeteer";
+import { matchRoute, networks } from './routes';
 const puppeteerConfig = require('../puppeteer.config.json');
 
 if (config.PUPPETEER.EXEC_PATH) {
@@ -335,15 +334,15 @@ class Server {
     const matchedRoute = matchRoute(this.network, path);
     let ogImageUrl = config.SERVER.HOST + (matchedRoute.staticImg || matchedRoute.fallbackImg);
     let ogTitle = 'The Mempool Open Source Project®';
-    let ogDescription = 'Explore the full Bitcoin ecosystem with mempool.space';
+    let ogDescription = 'Explore the full BBQCoin ecosystem with mempool.space';
 
     const canonical = this.canonicalHost + rawPath;
 
     if (matchedRoute.render) {
       ogImageUrl = `${config.SERVER.HOST}/render/${lang || 'en'}/preview${path}`;
-      ogTitle = `${this.networkName} ${matchedRoute.networkMode !== 'mainnet' ? capitalize(matchedRoute.networkMode) + ' ' : ''}${matchedRoute.title}`;
+      ogTitle = `BBQCoin ${matchedRoute.networkMode !== 'mainnet' ? capitalize(matchedRoute.networkMode) + ' ' : ''}${matchedRoute.title}`;
     } else {
-      ogTitle = networks[this.network].title;
+      ogTitle = 'BBQCoin Explorer';
     }
     if (matchedRoute.description) {
       ogDescription = matchedRoute.description;
@@ -353,18 +352,18 @@ class Server {
 <html lang="en-US" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>${ogTitle}</title>
+    <title>mempool - BBQCoin (BQC) Explorer</title>
     <link rel="canonical" href="${canonical}" />
     <meta name="description" content="${ogDescription}"/>
     <meta property="og:image" content="${ogImageUrl}"/>
     <meta property="og:image:type" content="image/png"/>
     <meta property="og:image:width" content="${matchedRoute.render ? 1200 : 1000}"/>
     <meta property="og:image:height" content="${matchedRoute.render ? 600 : 500}"/>
-    <meta property="og:title" content="${ogTitle}">
+    <meta property="og:title" content="mempool - BBQCoin (BQC) Explorer">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:site" content="@mempool">
     <meta property="twitter:creator" content="@mempool">
-    <meta property="twitter:title" content="${ogTitle}">
+    <meta property="twitter:title" content="mempool - BBQCoin (BQC) Explorer">
     <meta property="twitter:description" content="${ogDescription}"/>
     <meta property="twitter:image:src" content="${ogImageUrl}"/>
     <meta property="twitter:domain" content="mempool.space">

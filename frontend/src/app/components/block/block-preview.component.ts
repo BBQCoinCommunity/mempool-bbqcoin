@@ -1,16 +1,16 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { ElectrsApiService } from '@app/services/electrs-api.service';
-import { switchMap, tap, throttleTime, catchError, shareReplay, startWith, pairwise, filter } from 'rxjs/operators';
-import { of, Subscription, asyncScheduler, forkJoin } from 'rxjs';
-import { StateService } from '@app/services/state.service';
-import { SeoService } from '@app/services/seo.service';
-import { OpenGraphService } from '@app/services/opengraph.service';
-import { BlockExtended, TransactionStripped } from '@interfaces/node-api.interface';
 import { ApiService } from '@app/services/api.service';
+import { ElectrsApiService } from '@app/services/electrs-api.service';
+import { OpenGraphService } from '@app/services/opengraph.service';
+import { SeoService } from '@app/services/seo.service';
+import { ServicesApiServices } from '@app/services/services-api.service';
+import { StateService } from '@app/services/state.service';
 import { seoDescriptionNetwork } from '@app/shared/common.utils';
 import { BlockOverviewGraphComponent } from '@components/block-overview-graph/block-overview-graph.component';
-import { ServicesApiServices } from '@app/services/services-api.service';
+import { BlockExtended, TransactionStripped } from '@interfaces/node-api.interface';
+import { asyncScheduler, forkJoin, of, Subscription } from 'rxjs';
+import { catchError, filter, pairwise, shareReplay, startWith, switchMap, tap, throttleTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-block-preview',
@@ -190,7 +190,7 @@ export class BlockPreviewComponent implements OnInit, OnDestroy {
   }
 
   // TODO - Refactor this.fees/this.reward for liquid because it is not
-  // used anymore on Bitcoin networks (we use block.extras directly)
+  // used anymore on BBQCoin networks (we use block.extras directly)
   setBlockSubsidy() {
     this.blockSubsidy = 0;
   }

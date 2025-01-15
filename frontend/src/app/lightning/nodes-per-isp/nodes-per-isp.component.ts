@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, combineLatest, map, Observable, share, tap } from 'rxjs';
 import { ApiService } from '@app/services/api.service';
 import { SeoService } from '@app/services/seo.service';
 import { getFlagEmoji } from '@app/shared/common.utils';
 import { GeolocationData } from '@app/shared/components/geolocation/geolocation.component';
+import { BehaviorSubject, combineLatest, map, Observable, share, tap } from 'rxjs';
 
 @Component({
   selector: 'app-nodes-per-isp',
@@ -44,7 +44,7 @@ export class NodesPerISP implements OnInit {
             id: this.route.snapshot.params.isp.split(',').join(', ')
           };
           this.seoService.setTitle($localize`Lightning nodes on ISP: ${response.isp} [AS${this.route.snapshot.params.isp}]`);
-          this.seoService.setDescription($localize`:@@meta.description.lightning.nodes-isp:Browse all Bitcoin Lightning nodes using the ${response.isp} [AS${this.route.snapshot.params.isp}] ISP and see aggregate stats like total number of nodes, total capacity, and more for the ISP.`);
+          this.seoService.setDescription($localize`:@@meta.description.lightning.nodes-isp:Browse all BBQCoin Lightning nodes using the ${response.isp} [AS${this.route.snapshot.params.isp}] ISP and see aggregate stats like total number of nodes, total capacity, and more for the ISP.`);
 
           for (const i in response.nodes) {
             response.nodes[i].geolocation = <GeolocationData>{

@@ -1,7 +1,7 @@
-import memPool from '../mempool';
 import logger from '../../logger';
-import { TransactionExtended, OptimizedStatistic } from '../../mempool.interfaces';
+import { OptimizedStatistic, TransactionExtended } from '../../mempool.interfaces';
 import { Common } from '../common';
+import memPool from '../mempool';
 import statisticsApi from './statistics-api';
 
 class Statistics {
@@ -96,7 +96,7 @@ class Statistics {
       }
     });
 
-    // get minFee and convert to sats/vb
+    // get minFee and convert to satflames/vB
     const minFee = memPool.getMempoolInfo().mempoolminfee * 100000;
 
     try {

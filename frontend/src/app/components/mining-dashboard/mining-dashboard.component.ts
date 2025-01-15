@@ -1,9 +1,9 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
-import { SeoService } from '@app/services/seo.service';
-import { OpenGraphService } from '@app/services/opengraph.service';
-import { WebsocketService } from '@app/services/websocket.service';
-import { StateService } from '@app/services/state.service';
 import { EventType, NavigationStart, Router } from '@angular/router';
+import { OpenGraphService } from '@app/services/opengraph.service';
+import { SeoService } from '@app/services/seo.service';
+import { StateService } from '@app/services/state.service';
+import { WebsocketService } from '@app/services/websocket.service';
 
 @Component({
   selector: 'app-mining-dashboard',
@@ -27,7 +27,7 @@ export class MiningDashboardComponent implements OnInit, AfterViewInit {
     this.onResize();
     this.websocketService.want(['blocks', 'mempool-blocks', 'stats']);
     this.seoService.setTitle($localize`:@@a681a4e2011bb28157689dbaa387de0dd0aa0c11:Mining Dashboard`);
-    this.seoService.setDescription($localize`:@@meta.description.mining.dashboard:Get real-time Bitcoin mining stats like hashrate, difficulty adjustment, block rewards, pool dominance, and more.`);
+    this.seoService.setDescription($localize`:@@meta.description.mining.dashboard:Get real-time BBQCoin mining stats like hashrate, difficulty adjustment, block rewards, pool dominance, and more.`);
     this.ogService.setManualOgImage('mining.jpg');
   }
 

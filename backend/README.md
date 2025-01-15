@@ -28,7 +28,7 @@ latestrelease=$(curl -s https://api.github.com/repos/mempool/mempool/releases/la
 git checkout $latestrelease
 ```
 
-### 2. Configure Bitcoin Core
+### 2. Configure BBQCoin Core
 
 Turn on `txindex`, enable RPC, and set RPC credentials in `bitcoin.conf`:
 
@@ -100,7 +100,7 @@ cp mempool-config.sample.json mempool-config.json
 Edit `mempool-config.json` as needed. 
 
 In particular, make sure:
-- the correct Bitcoin Core RPC credentials are specified in `CORE_RPC`
+- the correct BBQCoin Core RPC credentials are specified in `CORE_RPC`
 - the correct `BACKEND` is specified in `MEMPOOL`:
   - "electrum" if you're using [romanz/electrs](https://github.com/romanz/electrs) or [cculianu/Fulcrum](https://github.com/cculianu/Fulcrum)
   - "esplora" if you're using [mempool/electrs](https://github.com/mempool/electrs)
@@ -196,7 +196,7 @@ Mine blocks to the previously generated address. You need at least 101 blocks be
    bitcoin-cli -regtest generatetoaddress 101 $address
    ```
 
-Send 0.1 BTC at 5 sat/vB to another address:
+Send 0.1 BTC at 5 flames/vB to another address:
    ```
    bitcoin-cli -named -regtest sendtoaddress address=$(bitcoin-cli -regtest getnewaddress) amount=0.1 fee_rate=5
    ```

@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Input, LOCALE_ID, OnInit, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { chartColors, poolsColor } from '@app/app.constants';
 import { EChartsOption } from '@app/graphs/echarts';
+import { ApiService } from '@app/services/api.service';
+import { MiningService } from '@app/services/mining.service';
+import { SeoService } from '@app/services/seo.service';
+import { StateService } from '@app/services/state.service';
+import { StorageService } from '@app/services/storage.service';
+import { download } from '@app/shared/graphs.utils';
 import { Observable } from 'rxjs';
 import { delay, map, retryWhen, share, startWith, switchMap, tap } from 'rxjs/operators';
-import { ApiService } from '@app/services/api.service';
-import { SeoService } from '@app/services/seo.service';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { chartColors, poolsColor } from '@app/app.constants';
-import { StorageService } from '@app/services/storage.service';
-import { MiningService } from '@app/services/mining.service';
-import { download } from '@app/shared/graphs.utils';
-import { ActivatedRoute } from '@angular/router';
-import { StateService } from '@app/services/state.service';
 
 interface Hashrate {
   timestamp: number;
@@ -72,7 +72,7 @@ export class HashrateChartPoolsComponent implements OnInit {
     let firstRun = true;
 
     this.seoService.setTitle($localize`:@@mining.pools-historical-dominance:Pools Historical Dominance`);
-    this.seoService.setDescription($localize`:@@meta.descriptions.bitcoin.graphs.hashrate-pools:See Bitcoin mining pool dominance visualized over time: see how top mining pools' share of total hashrate has fluctuated over time.`);
+    this.seoService.setDescription($localize`:@@meta.descriptions.bitcoin.graphs.hashrate-pools:See BBQCoin mining pool dominance visualized over time: see how top mining pools' share of total hashrate has fluctuated over time.`);
     this.miningWindowPreference = this.miningService.getDefaultTimespan('6m');
     this.radioGroupForm = this.formBuilder.group({ dateSpan: this.miningWindowPreference });
     this.radioGroupForm.controls.dateSpan.setValue(this.miningWindowPreference);

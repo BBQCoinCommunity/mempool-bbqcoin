@@ -1,13 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WebsocketService } from '@app/services/websocket.service';
-import { OptimizedMempoolStats } from '@interfaces/node-api.interface';
-import { StateService } from '@app/services/state.service';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@app/services/api.service';
 import { SeoService } from '@app/services/seo.service';
-import { ActivatedRoute } from '@angular/router';
-import { map, scan, startWith, switchMap, tap } from 'rxjs/operators';
+import { StateService } from '@app/services/state.service';
+import { WebsocketService } from '@app/services/websocket.service';
+import { OptimizedMempoolStats } from '@interfaces/node-api.interface';
 import { interval, merge, Observable, Subscription } from 'rxjs';
-import { ChangeDetectionStrategy } from '@angular/core';
+import { map, scan, startWith, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-television',
@@ -37,7 +36,7 @@ export class TelevisionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.seoService.setTitle($localize`:@@46ce8155c9ab953edeec97e8950b5a21e67d7c4e:TV view`);
-    this.seoService.setDescription($localize`:@@meta.description.tv:See Bitcoin blocks and mempool congestion in real-time in a simplified format perfect for a TV.`);
+    this.seoService.setDescription($localize`:@@meta.description.tv:See BBQCoin blocks and mempool congestion in real-time in a simplified format perfect for a TV.`);
     this.websocketService.want(['blocks', 'live-2h-chart', 'mempool-blocks']);
 
     this.timeLtrSubscription = this.stateService.timeLtr.subscribe((ltr) => {

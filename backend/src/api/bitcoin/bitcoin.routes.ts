@@ -1,26 +1,25 @@
-import { Application, Request, Response } from 'express';
-import axios from 'axios';
 import * as bitcoinjs from 'bitcoinjs-lib';
+import { Application, Request, Response } from 'express';
 import config from '../../config';
-import websocketHandler from '../websocket-handler';
-import mempool from '../mempool';
-import feeApi from '../fee-api';
-import mempoolBlocks from '../mempool-blocks';
-import bitcoinApi from './bitcoin-api-factory';
-import { Common } from '../common';
-import backendInfo from '../backend-info';
-import transactionUtils from '../transaction-utils';
-import { IEsploraApi } from './esplora-api.interface';
-import loadingIndicators from '../loading-indicators';
-import { TransactionExtended } from '../../mempool.interfaces';
 import logger from '../../logger';
-import blocks from '../blocks';
-import bitcoinClient from './bitcoin-client';
-import difficultyAdjustment from '../difficulty-adjustment';
+import { TransactionExtended } from '../../mempool.interfaces';
 import transactionRepository from '../../repositories/TransactionRepository';
-import rbfCache from '../rbf-cache';
-import { calculateMempoolTxCpfp } from '../cpfp';
 import { handleError } from '../../utils/api';
+import backendInfo from '../backend-info';
+import blocks from '../blocks';
+import { Common } from '../common';
+import { calculateMempoolTxCpfp } from '../cpfp';
+import difficultyAdjustment from '../difficulty-adjustment';
+import feeApi from '../fee-api';
+import loadingIndicators from '../loading-indicators';
+import mempool from '../mempool';
+import mempoolBlocks from '../mempool-blocks';
+import rbfCache from '../rbf-cache';
+import transactionUtils from '../transaction-utils';
+import websocketHandler from '../websocket-handler';
+import bitcoinApi from './bitcoin-api-factory';
+import bitcoinClient from './bitcoin-client';
+import { IEsploraApi } from './esplora-api.interface';
 
 const TXID_REGEX = /^[a-f0-9]{64}$/i;
 const BLOCK_HASH_REGEX = /^[a-f0-9]{64}$/i;
@@ -477,7 +476,7 @@ class BitcoinRoutes {
   private async getBlocksByBulk(req: Request, res: Response) {
     try {
       if (['mainnet', 'testnet', 'signet'].includes(config.MEMPOOL.NETWORK) === false) { // Liquid - Not implemented
-        handleError(req, res, 404, `This API is only available for Bitcoin networks`);
+        handleError(req, res, 404, `This API is only available for BBQCoin networks`);
         return;
       }
       if (config.MEMPOOL.MAX_BLOCKS_BULK_QUERY <= 0) {

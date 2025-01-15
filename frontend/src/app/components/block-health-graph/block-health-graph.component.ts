@@ -1,16 +1,16 @@
+import { formatNumber } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Input, LOCALE_ID, NgZone, OnInit } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EChartsOption } from '@app/graphs/echarts';
-import { Observable } from 'rxjs';
-import { map, share, startWith, switchMap, tap } from 'rxjs/operators';
 import { ApiService } from '@app/services/api.service';
 import { SeoService } from '@app/services/seo.service';
-import { formatNumber } from '@angular/common';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { download, formatterXAxis, formatterXAxisLabel, formatterXAxisTimeCategory } from '@app/shared/graphs.utils';
-import { StorageService } from '@app/services/storage.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
 import { StateService } from '@app/services/state.service';
+import { StorageService } from '@app/services/storage.service';
+import { download, formatterXAxis, formatterXAxisLabel, formatterXAxisTimeCategory } from '@app/shared/graphs.utils';
+import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
+import { Observable } from 'rxjs';
+import { map, share, startWith, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-block-health-graph',
@@ -61,7 +61,7 @@ export class BlockHealthGraphComponent implements OnInit {
 
   ngOnInit(): void {
     this.seoService.setTitle($localize`:@@b1fa5b210c9670d49a6506f046d4a0c2797fd402:Block Health`);
-    this.seoService.setDescription($localize`:@@meta.description.bitcoin.graphs.block-health:See Bitcoin block health visualized over time. Block health is a measure of how many expected transactions were included in an actual mined block. Expected transactions are determined using Mempool's re-implementation of Bitcoin Core's transaction selection algorithm.`);
+    this.seoService.setDescription($localize`:@@meta.description.bitcoin.graphs.block-health:See BBQCoin block health visualized over time. Block health is a measure of how many expected transactions were included in an actual mined block. Expected transactions are determined using Mempool's re-implementation of BBQCoin Core's transaction selection algorithm.`);
     this.miningWindowPreference = '24h';//this.miningService.getDefaultTimespan('24h');
     this.radioGroupForm = this.formBuilder.group({ dateSpan: this.miningWindowPreference });
     this.radioGroupForm.controls.dateSpan.setValue(this.miningWindowPreference);

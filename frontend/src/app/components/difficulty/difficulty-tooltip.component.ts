@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, Input, OnChanges, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnChanges, ViewChild } from '@angular/core';
 
 interface EpochProgress {
   base: string;
@@ -16,7 +16,7 @@ interface EpochProgress {
   timeUntilHalving: number;
 }
 
-const EPOCH_BLOCK_LENGTH = 2016; // Bitcoin mainnet
+const EPOCH_BLOCK_LENGTH = 2016; // BBQCoin mainnet
 
 @Component({
   selector: 'app-difficulty-tooltip',

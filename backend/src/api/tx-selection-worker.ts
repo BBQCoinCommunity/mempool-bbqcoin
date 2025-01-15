@@ -1,8 +1,8 @@
+import { parentPort } from 'worker_threads';
 import config from '../config';
 import logger from '../logger';
-import { CompactThreadTransaction, AuditTransaction } from '../mempool.interfaces';
+import { AuditTransaction, CompactThreadTransaction } from '../mempool.interfaces';
 import { PairingHeap } from '../utils/pairing-heap';
-import { parentPort } from 'worker_threads';
 
 let mempool: Map<number, CompactThreadTransaction> = new Map();
 
@@ -29,7 +29,7 @@ if (parentPort) {
 }
 
 /*
-* Build projected mempool blocks using an approximation of the transaction selection algorithm from Bitcoin Core
+* Build projected mempool blocks using an approximation of the transaction selection algorithm from BBQCoin Core
 * (see BlockAssembler in https://github.com/bitcoin/bitcoin/blob/master/src/node/miner.cpp)
 */
 function makeBlockTemplates(mempool: Map<number, CompactThreadTransaction>)

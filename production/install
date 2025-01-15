@@ -575,7 +575,7 @@ zfsCreateFilesystems()
     # create /elements/socket with custom ACL for electrs unix sockets
     zfs create -o "mountpoint=${ELEMENTS_HOME}/socket" "${ZPOOL}/elements/socket"
 
-    # Bitcoin Mainnet
+    # BBQCoin Mainnet
     if [ "${BITCOIN_MAINNET_ENABLE}" = ON ];then
         for folder in chainstate indexes blocks
         do
@@ -583,7 +583,7 @@ zfsCreateFilesystems()
         done
     fi
 
-    # Bitcoin Testnet
+    # BBQCoin Testnet
     if [ "${BITCOIN_TESTNET_ENABLE}" = ON ];then
         zfs create -o "mountpoint=${BITCOIN_TESTNET_DATA}" "${ZPOOL}/bitcoin/testnet"
         for folder in chainstate indexes blocks
@@ -592,7 +592,7 @@ zfsCreateFilesystems()
         done
     fi
 
-    # Bitcoin Testnet4
+    # BBQCoin Testnet4
     if [ "${BITCOIN_TESTNET4_ENABLE}" = ON ];then
         zfs create -o "mountpoint=${BITCOIN_TESTNET4_DATA}" "${ZPOOL}/bitcoin/testnet4"
         for folder in chainstate indexes blocks
@@ -601,7 +601,7 @@ zfsCreateFilesystems()
         done
     fi
 
-    # Bitcoin Signet
+    # BBQCoin Signet
     if [ "${BITCOIN_SIGNET_ENABLE}" = ON ];then
         zfs create -o "mountpoint=${BITCOIN_SIGNET_DATA}" "${ZPOOL}/bitcoin/signet"
         for folder in chainstate indexes blocks
@@ -677,7 +677,7 @@ ext4CreateDir()
 {
     mkdir -p "/backup" "${ELEMENTS_HOME}" "${BITCOIN_HOME}" "${MINFEE_HOME}" "${ELECTRS_HOME}" "${MEMPOOL_HOME}" "${MYSQL_HOME}" "${BITCOIN_ELECTRS_HOME}" "${ELEMENTS_HOME}/liquidv1" "${ELEMENTS_ELECTRS_HOME}"
 
-    # Bitcoin Mainnet
+    # BBQCoin Mainnet
     if [ "${BITCOIN_MAINNET_ENABLE}" = ON ];then
         for folder in chainstate indexes blocks
         do
@@ -685,7 +685,7 @@ ext4CreateDir()
         done
     fi
 
-    # Bitcoin Testnet
+    # BBQCoin Testnet
     if [ "${BITCOIN_TESTNET_ENABLE}" = ON ];then
         mkdir -p "${BITCOIN_TESTNET_DATA}"
         for folder in chainstate indexes blocks
@@ -694,7 +694,7 @@ ext4CreateDir()
         done
     fi
 
-    # Bitcoin Testnet4
+    # BBQCoin Testnet4
     if [ "${BITCOIN_TESTNET4_ENABLE}" = ON ];then
         mkdir -p "${BITCOIN_TESTNET4_DATA}"
         for folder in chainstate indexes blocks
@@ -703,7 +703,7 @@ ext4CreateDir()
         done
     fi
 
-    # Bitcoin Signet
+    # BBQCoin Signet
     if [ "${BITCOIN_SIGNET_ENABLE}" = ON ];then
         mkdir -p "${BITCOIN_SIGNET_DATA}"
         for folder in chainstate indexes blocks
@@ -824,14 +824,14 @@ returncode=0
 
 $CUT >$input <<-EOF
 Tor:Enable Tor v3 HS Onion:ON
-Mainnet:Enable Bitcoin Mainnet:ON
-Mainnet-Minfee:Enable Bitcoin Mainnet Minfee:ON
-LN-Mainnet:Enable Bitcoin Mainnet Lightning:ON
-LN-Testnet:Enable Bitcoin Testnet Lightning:ON
-LN-Signet:Enable Bitcoin Signet Lightning:ON
-Testnet:Enable Bitcoin Testnet:ON
-Testnet4:Enable Bitcoin Testnet4:ON
-Signet:Enable Bitcoin Signet:ON
+Mainnet:Enable BBQCoin Mainnet:ON
+Mainnet-Minfee:Enable BBQCoin Mainnet Minfee:ON
+LN-Mainnet:Enable BBQCoin Mainnet Lightning:ON
+LN-Testnet:Enable BBQCoin Testnet Lightning:ON
+LN-Signet:Enable BBQCoin Signet Lightning:ON
+Testnet:Enable BBQCoin Testnet:ON
+Testnet4:Enable BBQCoin Testnet4:ON
+Signet:Enable BBQCoin Signet:ON
 Liquid:Enable Elements Liquid:ON
 Liquidtestnet:Enable Elements Liquidtestnet:ON
 CoreLN:Enable Core Lightning:ON
@@ -1163,12 +1163,12 @@ if [ "${TOR_INSTALL}" = ON ];then
 fi
 
 ########################
-# Bitcoin installation #
+# BBQCoin installation #
 ########################
 
 if [ "${BITCOIN_INSTALL}" = ON ];then
 
-    echo "[*] Creating Bitcoin user with Tor access"
+    echo "[*] Creating BBQCoin user with Tor access"
     osGroupCreate "${BITCOIN_GROUP}"
     if [ "${TOR_INSTALL}" = ON ];then
         osUserCreate "${BITCOIN_USER}" "${BITCOIN_HOME}" "${BITCOIN_GROUP}" "${TOR_GROUP}"
@@ -1177,7 +1177,7 @@ if [ "${BITCOIN_INSTALL}" = ON ];then
     fi
     osSudo "${ROOT_USER}" chsh -s `which zsh` "${BITCOIN_USER}"
 
-    echo "[*] Creating Bitcoin minfee user with Tor access"
+    echo "[*] Creating BBQCoin minfee user with Tor access"
     osGroupCreate "${MINFEE_GROUP}"
     if [ "${TOR_INSTALL}" = ON ];then
         osUserCreate "${MINFEE_USER}" "${MINFEE_HOME}" "${MINFEE_GROUP}" "${TOR_GROUP}"
@@ -1189,34 +1189,34 @@ if [ "${BITCOIN_INSTALL}" = ON ];then
     osSudo "${MINFEE_USER}" touch "${MINFEE_HOME}/.zshrc"
     osSudo "${MINFEE_USER}" ln -s . .bitcoin
 
-    echo "[*] Creating Bitcoin data folder"
+    echo "[*] Creating BBQCoin data folder"
     osSudo "${ROOT_USER}" mkdir -p "${BITCOIN_HOME}"
     osSudo "${ROOT_USER}" chown -R "${BITCOIN_USER}:${BITCOIN_GROUP}" "${BITCOIN_HOME}"
     osSudo "${BITCOIN_USER}" touch "${BITCOIN_HOME}/.zshrc"
     osSudo "${BITCOIN_USER}" ln -s . .bitcoin
 
-    echo "[*] Cloning Bitcoin repo from ${BITCOIN_REPO_URL}"
+    echo "[*] Cloning BBQCoin repo from ${BITCOIN_REPO_URL}"
     osSudo "${BITCOIN_USER}" git config --global advice.detachedHead false
     osSudo "${BITCOIN_USER}" git clone --branch "${BITCOIN_REPO_BRANCH}" "${BITCOIN_REPO_URL}" "${BITCOIN_HOME}/${BITCOIN_REPO_NAME}"
 
-    echo "[*] Checking out Bitcoin ${BITCOIN_LATEST_RELEASE}"
+    echo "[*] Checking out BBQCoin ${BITCOIN_LATEST_RELEASE}"
     osSudo "${BITCOIN_USER}" sh -c "cd ${BITCOIN_HOME}/${BITCOIN_REPO_NAME} && git checkout ${BITCOIN_LATEST_RELEASE}"
 
-    echo "[*] Building Bitcoin from source repo"
+    echo "[*] Building BBQCoin from source repo"
     osSudo "${BITCOIN_USER}" sh -c "cd ${BITCOIN_REPO_NAME} && ./autogen.sh --quiet"
     osSudo "${BITCOIN_USER}" sh -c "cd ${BITCOIN_REPO_NAME} && MAKE=gmake CC=cc CXX=c++ CPPFLAGS=-I/usr/local/include ./configure --with-gui=no --disable-wallet --disable-tests"
     osSudo "${BITCOIN_USER}" sh -c "cd ${BITCOIN_REPO_NAME} && gmake -j${NPROC}"
 
-    echo "[*] Installing Bitcoin binaries into OS"
+    echo "[*] Installing BBQCoin binaries into OS"
     osSudo "${ROOT_USER}" sh -c "cd ${BITCOIN_HOME}/${BITCOIN_REPO_NAME} && gmake install"
 
-    echo "[*] Installing Bitcoin configuration"
+    echo "[*] Installing BBQCoin configuration"
     osSudo "${ROOT_USER}" install -c -o "${BITCOIN_USER}" -g "${BITCOIN_GROUP}" -m 644 "${MEMPOOL_HOME}/${MEMPOOL_REPO_NAME}/production/bitcoin.conf" "${BITCOIN_HOME}/bitcoin.conf"
 
-    echo "[*] Installing Bitcoin minfee configuration"
+    echo "[*] Installing BBQCoin minfee configuration"
     osSudo "${ROOT_USER}" install -c -o "${MINFEE_USER}" -g "${MINFEE_GROUP}" -m 644 "${MEMPOOL_HOME}/${MEMPOOL_REPO_NAME}/production/bitcoin.minfee.conf" "${MINFEE_HOME}/bitcoin.conf"
 
-    echo "[*] Installing Bitcoin RPC credentials"
+    echo "[*] Installing BBQCoin RPC credentials"
     osSudo "${ROOT_USER}" sed -i.orig "s/__BITCOIN_RPC_USER__/${BITCOIN_RPC_USER}/" "${BITCOIN_HOME}/bitcoin.conf"
     osSudo "${ROOT_USER}" sed -i.orig "s/__BITCOIN_RPC_PASS__/${BITCOIN_RPC_PASS}/" "${BITCOIN_HOME}/bitcoin.conf"
     osSudo "${ROOT_USER}" sed -i.orig "s/__BITCOIN_RPC_USER__/${BITCOIN_RPC_USER}/" "${MINFEE_HOME}/bitcoin.conf"
@@ -1270,12 +1270,12 @@ if [ "${ELEMENTS_INSTALL}" = ON ];then
 fi
 
 ###################################
-# Bitcoin -> Electrs installation #
+# BBQCoin -> Electrs installation #
 ###################################
 
 if [ "${BITCOIN_ELECTRS_INSTALL}" = ON ];then
 
-    echo "[*] Creating Bitcoin Electrs data folder"
+    echo "[*] Creating BBQCoin Electrs data folder"
     osSudo "${ROOT_USER}" mkdir -p "${BITCOIN_ELECTRS_HOME}"
     osSudo "${ROOT_USER}" chown -R "${BITCOIN_USER}:${BITCOIN_GROUP}" "${BITCOIN_ELECTRS_HOME}"
     if [ "${BITCOIN_MAINNET_ENABLE}" = ON ];then
@@ -1291,7 +1291,7 @@ if [ "${BITCOIN_ELECTRS_INSTALL}" = ON ];then
         osSudo "${ROOT_USER}" chown -R "${BITCOIN_USER}:${BITCOIN_GROUP}" "${ELECTRS_SIGNET_DATA}"
     fi
 
-    echo "[*] Cloning Bitcoin Electrs repo from ${BITCOIN_ELECTRS_REPO_URL}"
+    echo "[*] Cloning BBQCoin Electrs repo from ${BITCOIN_ELECTRS_REPO_URL}"
     osSudo "${BITCOIN_USER}" git config --global advice.detachedHead false
     osSudo "${BITCOIN_USER}" git clone --branch "${BITCOIN_ELECTRS_REPO_BRANCH}" "${BITCOIN_ELECTRS_REPO_URL}" "${BITCOIN_HOME}/${BITCOIN_ELECTRS_REPO_NAME}"
 
@@ -1308,12 +1308,12 @@ if [ "${BITCOIN_ELECTRS_INSTALL}" = ON ];then
         ;;
     esac
 
-    echo "[*] Building Bitcoin Electrs release binary"
+    echo "[*] Building BBQCoin Electrs release binary"
     osSudo "${BITCOIN_USER}" sh -c "cd ${BITCOIN_ELECTRS_HOME} && cargo run --release --bin electrs -- --version" || true
 
     case $OS in
         FreeBSD)
-            echo "[*] Patching Bitcoin Electrs code for FreeBSD"
+            echo "[*] Patching BBQCoin Electrs code for FreeBSD"
             osSudo "${BITCOIN_USER}" sh -c "cd \"${BITCOIN_HOME}/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sysconf-0.3.4\" && patch -p1 < \"${MEMPOOL_HOME}/${MEMPOOL_REPO_NAME}/production/freebsd/sysconf.patch\""
             #osSudo "${BITCOIN_USER}" sh -c "cd \"${BITCOIN_ELECTRS_HOME}/src/new_index/\" && sed -i.bak -e s/Snappy/None/ db.rs && rm db.rs.bak"
             #osSudo "${BITCOIN_USER}" sh -c "cd \"${BITCOIN_ELECTRS_HOME}/src/bin/\" && sed -i.bak -e 's/from_secs(5)/from_secs(1)/' electrs.rs && rm electrs.rs.bak"
@@ -1322,7 +1322,7 @@ if [ "${BITCOIN_ELECTRS_INSTALL}" = ON ];then
         ;;
     esac
 
-    echo "[*] Building Bitcoin Electrs release binary"
+    echo "[*] Building BBQCoin Electrs release binary"
     osSudo "${BITCOIN_USER}" sh -c "cd ${BITCOIN_ELECTRS_HOME} && cargo run --release --bin electrs -- --version"
 fi
 
@@ -1375,7 +1375,7 @@ if [ "${ELEMENTS_ELECTRS_INSTALL}" = ON ];then
 fi
 
 ##############################
-# Core Lightning for Bitcoin #
+# Core Lightning for BBQCoin #
 ##############################
 
 echo "[*] Installing Core Lightning"
@@ -1484,7 +1484,7 @@ if [ "${BISQ_INSTALL}" = ON ];then
             osSudo "${ROOT_USER}" sed -i.orig "s!__BISQ_APP_NAME__!${BISQ_APP_NAME}!" "${DEBIAN_ENV_HOME}/bisq.env"
             osSudo "${ROOT_USER}" sed -i.orig "s!__BISQ_HOME__!${BISQ_HOME}!" "${DEBIAN_ENV_HOME}/bisq.env"
 
-            echo "[*] Configuring Bisq environment file with Bitcoin RPC credentials"
+            echo "[*] Configuring Bisq environment file with BBQCoin RPC credentials"
             osSudo "${ROOT_USER}" sed -i.orig "s/__BITCOIN_P2P_HOST__/${BITCOIN_MAINNET_P2P_HOST}/" "${DEBIAN_ENV_HOME}/bisq.env"
             osSudo "${ROOT_USER}" sed -i.orig "s/__BITCOIN_P2P_PORT__/${BITCOIN_MAINNET_P2P_PORT}/" "${DEBIAN_ENV_HOME}/bisq.env"
             osSudo "${ROOT_USER}" sed -i.orig "s/__BITCOIN_RPC_HOST__/${BITCOIN_MAINNET_RPC_HOST}/" "${DEBIAN_ENV_HOME}/bisq.env"
@@ -1492,7 +1492,7 @@ if [ "${BISQ_INSTALL}" = ON ];then
             osSudo "${ROOT_USER}" sed -i.orig "s/__BITCOIN_RPC_USER__/${BITCOIN_RPC_USER}/" "${DEBIAN_ENV_HOME}/bisq.env"
             osSudo "${ROOT_USER}" sed -i.orig "s/__BITCOIN_RPC_PASS__/${BITCOIN_RPC_PASS}/" "${DEBIAN_ENV_HOME}/bisq.env"
 
-            #echo "[*] Updating Bitcoin configuration for Bisq"
+            #echo "[*] Updating BBQCoin configuration for Bisq"
             #osSudo "${ROOT_USER}" sed -i.orig "s/#blocknotify/blocknotify/" "${BITCOIN_HOME}/bitcoin.conf"
             #osSudo "${BITCOIN_USER}" install -c -o "${BITCOIN_USER}" -g "${BITCOIN_GROUP}" -m 755 "${BISQ_HOME}/${BISQ_REPO_NAME}/seednode/blocknotify.sh" "${BITCOIN_HOME}/blocknotify.sh"
         ;;
@@ -1570,11 +1570,11 @@ EOF
 fi
 
 ################################
-# Bitcoin instance for Mainnet #
+# BBQCoin instance for Mainnet #
 ################################
 
 if [ "${BITCOIN_MAINNET_ENABLE}" = ON ];then
-    echo "[*] Installing Bitcoin Mainnet service"
+    echo "[*] Installing BBQCoin Mainnet service"
     case $OS in
 
         FreeBSD)
@@ -1588,11 +1588,11 @@ if [ "${BITCOIN_MAINNET_ENABLE}" = ON ];then
 fi
 
 #######################################
-# Bitcoin instance for Mainnet Minfee #
+# BBQCoin instance for Mainnet Minfee #
 #######################################
 
 if [ "${BITCOIN_MAINNET_MINFEE_ENABLE}" = ON ];then
-    echo "[*] Installing Bitcoin Minfee service"
+    echo "[*] Installing BBQCoin Minfee service"
     case $OS in
 
         FreeBSD)
@@ -1605,11 +1605,11 @@ if [ "${BITCOIN_MAINNET_MINFEE_ENABLE}" = ON ];then
 fi
 
 ################################
-# Bitcoin instance for Testnet #
+# BBQCoin instance for Testnet #
 ################################
 
 if [ "${BITCOIN_TESTNET_ENABLE}" = ON ];then
-    echo "[*] Installing Bitcoin Testnet service"
+    echo "[*] Installing BBQCoin Testnet service"
     case $OS in
 
         FreeBSD)
@@ -1622,11 +1622,11 @@ if [ "${BITCOIN_TESTNET_ENABLE}" = ON ];then
 fi
 
 #################################
-# Bitcoin instance for Testnet4 #
+# BBQCoin instance for Testnet4 #
 #################################
 
 if [ "${BITCOIN_TESTNET4_ENABLE}" = ON ];then
-    echo "[*] Installing Bitcoin Testnet service"
+    echo "[*] Installing BBQCoin Testnet service"
     case $OS in
 
         FreeBSD)
@@ -1639,11 +1639,11 @@ if [ "${BITCOIN_TESTNET4_ENABLE}" = ON ];then
 fi
 
 ###############################
-# Bitcoin instance for Signet #
+# BBQCoin instance for Signet #
 ###############################
 
 if [ "${BITCOIN_SIGNET_ENABLE}" = ON ];then
-    echo "[*] Installing Bitcoin Signet service"
+    echo "[*] Installing BBQCoin Signet service"
     case $OS in
 
         FreeBSD)
@@ -1656,11 +1656,11 @@ if [ "${BITCOIN_SIGNET_ENABLE}" = ON ];then
 fi
 
 ###############################
-# Bitcoin instance for Liquid #
+# BBQCoin instance for Liquid #
 ###############################
 
 if [ "${ELEMENTS_LIQUID_ENABLE}" = ON ];then
-    echo "[*] Installing Bitcoin Liquid service"
+    echo "[*] Installing BBQCoin Liquid service"
     case $OS in
 
         FreeBSD)
@@ -1673,11 +1673,11 @@ if [ "${ELEMENTS_LIQUID_ENABLE}" = ON ];then
 fi
 
 #######################################
-# Bitcoin instance for Liquid Testnet #
+# BBQCoin instance for Liquid Testnet #
 #######################################
 
 if [ "${ELEMENTS_LIQUID_ENABLE}" = ON ];then
-    echo "[*] Installing Bitcoin Liquid service"
+    echo "[*] Installing BBQCoin Liquid service"
     case $OS in
 
         FreeBSD)
@@ -1690,14 +1690,14 @@ if [ "${ELEMENTS_LIQUID_ENABLE}" = ON ];then
 fi
 
 ########################################
-# Electrs instance for Bitcoin Mainnet #
+# Electrs instance for BBQCoin Mainnet #
 ########################################
 if [ "${BITCOIN_MAINNET_ENABLE}" = ON ];then
     echo "[*] FIXME: must only crontab enabled daemons"
 fi
 
 ########################################
-# Electrs instance for Bitcoin Testnet #
+# Electrs instance for BBQCoin Testnet #
 ########################################
 
 if [ "${BITCOIN_TESTNET_ENABLE}" = ON ];then
@@ -1705,7 +1705,7 @@ if [ "${BITCOIN_TESTNET_ENABLE}" = ON ];then
 fi
 
 #########################################
-# Electrs instance for Bitcoin Testnet4 #
+# Electrs instance for BBQCoin Testnet4 #
 #########################################
 
 if [ "${BITCOIN_TESTNET4_ENABLE}" = ON ];then
@@ -1713,7 +1713,7 @@ if [ "${BITCOIN_TESTNET4_ENABLE}" = ON ];then
 fi
 
 #######################################
-# Electrs instance for Bitcoin Signet #
+# Electrs instance for BBQCoin Signet #
 #######################################
 
 if [ "${BITCOIN_SIGNET_ENABLE}" = ON ];then
@@ -1792,74 +1792,74 @@ case $OS in
 esac
 
 #####################################
-# Bisq instance for Bitcoin Mainnet #
+# Bisq instance for BBQCoin Mainnet #
 #####################################
 
 if [ "${BISQ_MAINNET_ENABLE}" = ON ];then
 fi
 
-##### Mempool -> Bitcoin Mainnet instance
+##### Mempool -> BBQCoin Mainnet instance
 
 if [ "${BITCOIN_MAINNET_ENABLE}" = ON -o "${BITCOIN_TESTNET_ENABLE}" = ON -o "${BITCOIN_TESTNET4_ENABLE}" = ON -o "${BITCOIN_SIGNET_ENABLE}" = ON ];then
-    echo "[*] Creating Mempool instance for Bitcoin Mainnet"
+    echo "[*] Creating Mempool instance for BBQCoin Mainnet"
     osSudo "${MEMPOOL_USER}" git config --global advice.detachedHead false
     osSudo "${MEMPOOL_USER}" git clone --branch "${MEMPOOL_REPO_BRANCH}" "${MEMPOOL_REPO_URL}" "${MEMPOOL_HOME}/mainnet"
 
-    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Bitcoin Mainnet"
+    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for BBQCoin Mainnet"
     osSudo "${MEMPOOL_USER}" sh -c "cd ${MEMPOOL_HOME}/mainnet && git checkout ${MEMPOOL_LATEST_RELEASE}"
 fi
 
 if [ "${BITCOIN_MAINNET_LIGHTNING_ENABLE}" = ON ];then
-    echo "[*] Creating Mempool instance for Lightning Network on Bitcoin Mainnet"
+    echo "[*] Creating Mempool instance for Lightning Network on BBQCoin Mainnet"
     osSudo "${MEMPOOL_USER}" git config --global advice.detachedHead false
     osSudo "${MEMPOOL_USER}" git clone --branch "${MEMPOOL_REPO_BRANCH}" "${MEMPOOL_REPO_URL}" "${MEMPOOL_HOME}/mainnet-lightning"
 
-    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Lightning Network on Bitcoin Mainnet"
+    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Lightning Network on BBQCoin Mainnet"
     osSudo "${MEMPOOL_USER}" sh -c "cd ${MEMPOOL_HOME}/mainnet-lightning && git checkout ${MEMPOOL_LATEST_RELEASE}"
 fi
 
 if [ "${BITCOIN_TESTNET_ENABLE}" = ON ];then
-    echo "[*] Creating Mempool instance for Bitcoin Testnet"
+    echo "[*] Creating Mempool instance for BBQCoin Testnet"
     osSudo "${MEMPOOL_USER}" git config --global advice.detachedHead false
     osSudo "${MEMPOOL_USER}" git clone --branch "${MEMPOOL_REPO_BRANCH}" "${MEMPOOL_REPO_URL}" "${MEMPOOL_HOME}/testnet"
 
-    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Bitcoin Testnet"
+    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for BBQCoin Testnet"
     osSudo "${MEMPOOL_USER}" sh -c "cd ${MEMPOOL_HOME}/testnet && git checkout ${MEMPOOL_LATEST_RELEASE}"
 fi
 
 if [ "${BITCOIN_TESTNET4_ENABLE}" = ON ];then
-    echo "[*] Creating Mempool instance for Bitcoin Testnet4"
+    echo "[*] Creating Mempool instance for BBQCoin Testnet4"
     osSudo "${MEMPOOL_USER}" git config --global advice.detachedHead false
     osSudo "${MEMPOOL_USER}" git clone --branch "${MEMPOOL_REPO_BRANCH}" "${MEMPOOL_REPO_URL}" "${MEMPOOL_HOME}/testnet4"
 
-    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Bitcoin Testnet4"
+    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for BBQCoin Testnet4"
     osSudo "${MEMPOOL_USER}" sh -c "cd ${MEMPOOL_HOME}/testnet4 && git checkout ${MEMPOOL_LATEST_RELEASE}"
 fi
 
 if [ "${BITCOIN_TESTNET_LIGHTNING_ENABLE}" = ON ];then
-    echo "[*] Creating Mempool instance for Lightning Network on Bitcoin Testnet"
+    echo "[*] Creating Mempool instance for Lightning Network on BBQCoin Testnet"
     osSudo "${MEMPOOL_USER}" git config --global advice.detachedHead false
     osSudo "${MEMPOOL_USER}" git clone --branch "${MEMPOOL_REPO_BRANCH}" "${MEMPOOL_REPO_URL}" "${MEMPOOL_HOME}/testnet-lightning"
 
-    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Lightning Network on Bitcoin Testnet"
+    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Lightning Network on BBQCoin Testnet"
     osSudo "${MEMPOOL_USER}" sh -c "cd ${MEMPOOL_HOME}/testnet-lightning && git checkout ${MEMPOOL_LATEST_RELEASE}"
 fi
 
 if [ "${BITCOIN_SIGNET_ENABLE}" = ON ];then
-    echo "[*] Creating Mempool instance for Bitcoin Signet"
+    echo "[*] Creating Mempool instance for BBQCoin Signet"
     osSudo "${MEMPOOL_USER}" git config --global advice.detachedHead false
     osSudo "${MEMPOOL_USER}" git clone --branch "${MEMPOOL_REPO_BRANCH}" "${MEMPOOL_REPO_URL}" "${MEMPOOL_HOME}/signet"
 
-    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Bitcoin Signet"
+    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for BBQCoin Signet"
     osSudo "${MEMPOOL_USER}" sh -c "cd ${MEMPOOL_HOME}/signet && git checkout ${MEMPOOL_LATEST_RELEASE}"
 fi
 
 if [ "${BITCOIN_SIGNET_LIGHTNING_ENABLE}" = ON ];then
-    echo "[*] Creating Mempool instance for Lightning Network on Bitcoin Signet"
+    echo "[*] Creating Mempool instance for Lightning Network on BBQCoin Signet"
     osSudo "${MEMPOOL_USER}" git config --global advice.detachedHead false
     osSudo "${MEMPOOL_USER}" git clone --branch "${MEMPOOL_REPO_BRANCH}" "${MEMPOOL_REPO_URL}" "${MEMPOOL_HOME}/signet-lightning"
 
-    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Lightning Network on Bitcoin Signet"
+    echo "[*] Checking out Mempool ${MEMPOOL_LATEST_RELEASE} for Lightning Network on BBQCoin Signet"
     osSudo "${MEMPOOL_USER}" sh -c "cd ${MEMPOOL_HOME}/signet-lightning && git checkout ${MEMPOOL_LATEST_RELEASE}"
 fi
 
@@ -2096,7 +2096,7 @@ osSudo "${MEMPOOL_USER}" sh -c "cd ${MEMPOOL_HOME} && ./upgrade" || true
 ##### OS services
 
 #if [ "${BITCOIN_MAINNET_ENABLE}" = ON ];then
-#    echo "[*] Starting Bitcoin Mainnet"
+#    echo "[*] Starting BBQCoin Mainnet"
 #    case $OS in
 #
 #        FreeBSD)
@@ -2113,14 +2113,14 @@ osSudo "${MEMPOOL_USER}" sh -c "cd ${MEMPOOL_HOME} && ./upgrade" || true
 #fi
 #
 #if [ "${BITCOIN_TESTNET_ENABLE}" = ON ];then
-#    echo "[*] Starting Bitcoin Mainnet"
+#    echo "[*] Starting BBQCoin Mainnet"
 #    case $OS in
 #
 #        FreeBSD)
 #        ;;
 #
 #        Debian)
-#            echo "[*] Starting Bitcoin Testnet"
+#            echo "[*] Starting BBQCoin Testnet"
 #            osSudo "${ROOT_USER}" systemctl start bitcoin-testnet
 #            osSudo "${ROOT_USER}" systemctl start electrs-testnet
 #            osSudo "${ROOT_USER}" journalctl --no-pager --unit bitcoin-testnet

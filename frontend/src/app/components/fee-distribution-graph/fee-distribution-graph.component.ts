@@ -1,9 +1,8 @@
-import { HostListener, OnChanges, OnDestroy } from '@angular/core';
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { TransactionStripped } from '@interfaces/node-api.interface';
+import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { selectPowerOfTen } from '@app/bitcoin.utils';
 import { StateService } from '@app/services/state.service';
 import { VbytesPipe } from '@app/shared/pipes/bytes-pipe/vbytes.pipe';
-import { selectPowerOfTen } from '@app/bitcoin.utils';
+import { TransactionStripped } from '@interfaces/node-api.interface';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -123,7 +122,7 @@ export class FeeDistributionGraphComponent implements OnInit, OnChanges, OnDestr
         type: 'log',
         min: 1,
         max: this.data.reduce((min, val) => Math.max(min, val[1]), 1),
-        // name: 'Effective Fee Rate s/vb',
+        // name: 'Effective Fee Rate flames/vB',
         // nameLocation: 'middle',
         splitLine: {
           lineStyle: {
