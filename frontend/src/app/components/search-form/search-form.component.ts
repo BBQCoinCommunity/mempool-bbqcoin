@@ -1,15 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output, ViewChild, HostListener, ElementRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { EventType, NavigationStart, Router } from '@angular/router';
-import { AssetsService } from '@app/services/assets.service';
-import { Env, StateService } from '@app/services/state.service';
-import { Observable, of, Subject, zip, BehaviorSubject, combineLatest } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, catchError, map, startWith,  tap } from 'rxjs/operators';
-import { ElectrsApiService } from '@app/services/electrs-api.service';
-import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
 import { ApiService } from '@app/services/api.service';
+import { AssetsService } from '@app/services/assets.service';
+import { ElectrsApiService } from '@app/services/electrs-api.service';
+import { Env, StateService } from '@app/services/state.service';
+import { RelativeUrlPipe } from '@app/shared/pipes/relative-url/relative-url.pipe';
+import { findOtherNetworks, getRegex, getTargetUrl, needBaseModuleChange, Network } from '@app/shared/regex.utils';
 import { SearchResultsComponent } from '@components/search-form/search-results/search-results.component';
-import { Network, findOtherNetworks, getRegex, getTargetUrl, needBaseModuleChange } from '@app/shared/regex.utils';
+import { BehaviorSubject, combineLatest, Observable, of, Subject, zip } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, map, startWith, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-form',
@@ -128,7 +128,7 @@ export class SearchFormComponent implements OnInit {
           return zip(
             this.electrsApiService.getAddressesByPrefix$(text).pipe(catchError(() => of([]))),
             [{ nodes: [], channels: [] }],
-            this.getMiningPools()
+            //this.getMiningPools()
           );
         }
         return zip(
@@ -137,7 +137,7 @@ export class SearchFormComponent implements OnInit {
             nodes: [],
             channels: [],
           }))),
-          this.getMiningPools()
+          //this.getMiningPools()
         );
       }),
       map((result: any[]) => {

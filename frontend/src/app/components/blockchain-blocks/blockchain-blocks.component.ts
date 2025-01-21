@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Observable, Subscription, delay, filter, tap } from 'rxjs';
-import { StateService } from '@app/services/state.service';
-import { specialBlocks } from '@app/app.constants';
-import { BlockExtended } from '@interfaces/node-api.interface';
 import { Location } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { specialBlocks } from '@app/app.constants';
 import { CacheService } from '@app/services/cache.service';
+import { StateService } from '@app/services/state.service';
+import { BlockExtended } from '@interfaces/node-api.interface';
+import { Observable, Subscription, delay, filter, tap } from 'rxjs';
 
 interface BlockchainBlock extends BlockExtended {
   placeholder?: boolean;
@@ -28,8 +28,9 @@ export class BlockchainBlocksComponent implements OnInit, OnChanges, OnDestroy {
   @Input() blockWidth: number = 125;
   @Input() spotlight: number = 0;
   @Input() showPools: boolean = true;
+  @Input() debugMode: boolean = false; // New debug input
   @Input() getHref?: (index, block) => string = (index, block) => `/block/${block.id}`;
-  
+
   specialBlocks = specialBlocks;
   network = '';
   blocks: BlockchainBlock[] = [];
@@ -130,9 +131,17 @@ export class BlockchainBlocksComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.static) {
       this.blocksSubscription = this.stateService.blocks$
         .subscribe((blocks) => {
+          console.warn('Blocks updated:', blocks);
           if (!blocks?.length) {
+            console.warn('No blocks available.');
             return;
           }
+          blocks.forEach((block, index) => {
+            if (!block.extras) {
+              console.warn(`Block at index ${index} is missing extras:`, block);
+            }
+          });
+
           const latestHeight = blocks[0].height;
           const animate = this.chainTip != null && latestHeight > this.chainTip;
 
@@ -173,12 +182,11 @@ export class BlockchainBlocksComponent implements OnInit, OnChanges, OnDestroy {
         } else {
           this.moveArrowToPosition(true, false);
         }
-      })
+      });
     } else {
       this.blockPageSubscription = this.cacheService.loadedBlocks$.subscribe((block) => {
-        if (block.height <= this.height && block.height > this.height - this.count) {
-          this.onBlockLoaded(block);
-        }
+        console.warn('Block loaded:', block);
+        this.onBlockLoaded(block);
       });
     }
 
@@ -428,6 +436,7 @@ export class BlockchainBlocksComponent implements OnInit, OnChanges, OnDestroy {
   getMaxBlockFee(block: BlockExtended): number {
     if (block?.extras?.feeRange) {
       return block.extras.feeRange[block.extras.feeRange.length - 1];
+
     }
     return 0;
   }

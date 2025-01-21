@@ -33,31 +33,31 @@ const ADDRESS_CHARS: {
   };
 } = {
   mainnet: {
-    base58: `[13]` // Starts with a single 1 or 3
+    base58: `[b]` // Starts with a single 1 or 3
       + BASE58_CHARS
       + `{26,33}`, // Repeat the previous char 26-33 times.
       // Version byte 0x00 (P2PKH) can be as short as 27 characters, up to 34 length
       // P2SH must be 34 length
     bech32: `(?:`
-        + `bc1` // Starts with bc1
+        + `bqc` // Starts with bc1
         + BECH32_CHARS_LW
         + `{6,100}` // As per bech32, 6 char checksum is minimum
       + `|`
-        + `BC1` // All upper case version
+        + `BQC` // All upper case version
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
   },
   testnet: {
-    base58: `[mn2]` // Starts with a single m, n, or 2 (P2PKH is m or n, 2 is P2SH)
+    base58: `[B]` // Starts with a single m, n, or 2 (P2PKH is m or n, 2 is P2SH)
       + BASE58_CHARS
       + `{33,34}`, // m|n is 34 length, 2 is 35 length (We match the first letter separately)
     bech32: `(?:`
-        + `tb1` // Starts with tb1
+        + `bqc` // Starts with tb1
         + BECH32_CHARS_LW
         + `{6,100}` // As per bech32, 6 char checksum is minimum
       + `|`
-        + `TB1` // All upper case version
+        + `BQC` // All upper case version
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
@@ -217,31 +217,7 @@ export function getRegex(type: RegexType, network?: Network): RegExp {
       if (!network) {
         throw new Error(`Must pass network when type is blockhash`);
       }
-      let leadingZeroes: number;
-      switch (network) {
-        case `mainnet`:
-          leadingZeroes = 8; // Assumes at least 32 bits of difficulty
-          break;
-        case `testnet`:
-          leadingZeroes = 8; // Assumes at least 32 bits of difficulty
-          break;
-        case `testnet4`:
-          leadingZeroes = 8; // Assumes at least 32 bits of difficulty
-          break;
-        case `signet`:
-          leadingZeroes = 5;
-          break;
-        case `liquid`:
-          leadingZeroes = 8; // We are not interested in Liquid block hashes
-          break;
-        case `liquidtestnet`:
-          leadingZeroes = 8; // We are not interested in Liquid block hashes
-          break;
-        default:
-          throw new Error(`Invalid Network ${network} (Unreachable error in TypeScript)`);
-      }
-      regex += `0{${leadingZeroes}}`;
-      regex += `${HEX_CHARS}{${64 - leadingZeroes}}`; // Exactly 64 hex letters/numbers
+      regex += `${HEX_CHARS}{${64}}`; // Exactly 64 hex letters/numbers
       break;
     // Match a 32 byte tx hash in hex. Contains optional output index specifier.
     // [Testing Order]: Must always be tested after `blockhash`

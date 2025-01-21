@@ -1,7 +1,7 @@
 import '@angular/localize/init';
+import { BASE58_CHARS, BECH32_CHARS_LW, HEX_CHARS } from '@app/shared/regex.utils';
 import { ScriptInfo } from '@app/shared/script.utils';
 import { Vin, Vout } from '@interfaces/electrs.interface';
-import { BECH32_CHARS_LW, BASE58_CHARS, HEX_CHARS } from '@app/shared/regex.utils';
 
 export type AddressType = 'fee'
   | 'empty'
@@ -23,15 +23,15 @@ export type AddressType = 'fee'
 const ADDRESS_PREFIXES = {
   mainnet: {
     base58: {
-      pubkey: ['1'],
-      script: ['3'],
+      pubkey: ['Q'],
+      script: ['T'],
     },
-    bech32: 'bc1',
+    bech32: 'bqc',
   },
   testnet: {
     base58: {
-      pubkey: ['m', 'n'],
-      script: '2',
+      pubkey: ['q', 'r'],
+      script: 't',
     },
     bech32: 'tb1',
   },

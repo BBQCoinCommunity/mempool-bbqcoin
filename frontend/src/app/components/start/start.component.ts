@@ -1,9 +1,9 @@
-import { Component, ElementRef, HostListener, OnInit, OnDestroy, ViewChild, Input, ChangeDetectorRef, ChangeDetectionStrategy, AfterViewChecked } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { MarkBlockState, StateService } from '@app/services/state.service';
+import { AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { specialBlocks } from '@app/app.constants';
+import { MarkBlockState, StateService } from '@app/services/state.service';
 import { BlockExtended } from '@interfaces/node-api.interface';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { handleDemoRedirect } from '../../shared/common.utils';
 
 @Component({
@@ -138,27 +138,117 @@ export class StartComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (!block) {
           return;
         }
+        // EDIT
+        // Toggle logging on or off
+        const LOGGING_ENABLED = false;
 
-        for (const sb in specialBlocks) {
-          if (specialBlocks[sb].networks.includes(this.stateService.network || 'mainnet')) {
-            const height = parseInt(sb, 10);
-            const diff = height - block.height;
-            if (diff > 0 && diff <= 1008) {
-              this.countdown = diff;
-              this.eventName = specialBlocks[sb].labelEvent;
+        function log(...args) {
+          if (LOGGING_ENABLED) {
+            console.log(...args);
+          }
+        }
+
+        function warn(...args) {
+          if (LOGGING_ENABLED) {
+            console.warn(...args);
+          }
+        }
+
+        try {
+          log("Starting specialBlocks loop...");
+          for (const sb in specialBlocks) {
+            log(`Processing specialBlock key: ${sb}`);
+            const blockData = specialBlocks[sb];
+            log(`blockData for key ${sb}:`, blockData);
+
+            if (!blockData) {
+              warn(`blockData for key ${sb} is undefined or null.`);
+              continue;
+            }
+
+            // Ensure networks array always contains "mainnet"
+            if (!Array.isArray(blockData.networks)) {
+              warn(`blockData.networks is not an array for key ${sb}:`, blockData.networks);
+              blockData.networks = ["mainnet"]; // Default to "mainnet" if networks is not an array
+              log(`Set networks to ["mainnet"] for key ${sb}`);
+            } else if (!blockData.networks.includes("mainnet")) {
+              blockData.networks.push("mainnet"); // Add "mainnet" if not present
+              log(`Added "mainnet" to networks for key ${sb}`);
+            }
+
+            log(`Checking networks for key ${sb}:`, blockData.networks);
+            if (blockData.networks.includes("mainnet")) {
+              const height = parseInt(sb, 10);
+              log(`Parsed height: ${height}`);
+              const diff = height - block.height;
+              log(`Height difference: ${diff}`);
+              if (diff > 0 && diff <= 1008) {
+                log(`Setting countdown: ${diff}, eventName: ${blockData.labelEvent}`);
+                this.countdown = diff;
+                this.eventName = blockData.labelEvent;
+              }
             }
           }
-        }
-        for (const block of blocks) {
-          if (specialBlocks[block.height] && specialBlocks[block.height].networks.includes(this.stateService.network || 'mainnet')) {
-            this.specialEvent = true;
-            this.eventName = specialBlocks[block.height].labelEventCompleted;
+
+          log("Starting blocks loop...");
+          for (const block of blocks) {
+            log(`Processing block:`, block);
+
+            if (!block || typeof block.height !== "number") {
+              warn(`Invalid block or missing height:`, block);
+              continue;
+            }
+
+            const currentBlockData = specialBlocks[block.height];
+            const previousBlockData = specialBlocks[block.height - 8];
+
+            log(`currentBlockData for height ${block.height}:`, currentBlockData);
+            log(`previousBlockData for height ${block.height - 8}:`, previousBlockData);
+
+            // Ensure networks array always contains "mainnet" for currentBlockData
+            if (currentBlockData) {
+              if (!Array.isArray(currentBlockData.networks)) {
+                warn(
+                  `currentBlockData.networks is not an array for height ${block.height}:`,
+                  currentBlockData.networks
+                );
+                currentBlockData.networks = ["mainnet"];
+                log(`Set networks to ["mainnet"] for height ${block.height}`);
+              } else if (!currentBlockData.networks.includes("mainnet")) {
+                currentBlockData.networks.push("mainnet");
+                log(`Added "mainnet" to currentBlockData.networks for height ${block.height}`);
+              }
+            }
+
+            if (
+              currentBlockData &&
+              Array.isArray(currentBlockData.networks) &&
+              currentBlockData.networks.includes("mainnet")
+            ) {
+              log(
+                `Special event triggered at block height ${block.height}. Event name: ${currentBlockData.labelEventCompleted}`
+              );
+              this.specialEvent = true;
+              this.eventName = currentBlockData.labelEventCompleted;
+            }
+
+            if (
+              previousBlockData &&
+              Array.isArray(previousBlockData.networks) &&
+              previousBlockData.networks.includes("mainnet")
+            ) {
+              log(
+                `Special event reset at block height ${block.height - 8}. Clearing event name.`
+              );
+              this.specialEvent = false;
+              this.eventName = "";
+            }
           }
-          if (specialBlocks[block.height - 8] && specialBlocks[block.height - 8].networks.includes(this.stateService.network || 'mainnet')) {
-            this.specialEvent = false;
-            this.eventName = '';
-          }
+        } catch (error) {
+          console.error("An error occurred:", error);
+          console.error("Stack trace:", error.stack);
         }
+        // EDIT END
       });
     this.resetScrollSubscription = this.stateService.resetScroll$.subscribe(reset => {
       if (reset) {

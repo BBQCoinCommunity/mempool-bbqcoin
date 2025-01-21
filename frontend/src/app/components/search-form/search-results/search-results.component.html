@@ -17,24 +17,55 @@
       <ng-container *ngTemplateOutlet="goTo; context: { $implicit: results.searchText }"></ng-container>
     </button>
   </ng-template>
+  <!--
   <ng-template [ngIf]="results.txId && !results.liquidAsset.length">
     <div class="card-title" i18n="search.bitcoin-transaction">{{ networkName }} Transaction</div>
     <button (click)="clickItem(0)" [class.active]="0 === activeIdx" type="button" role="option" class="dropdown-item">
       <ng-container *ngTemplateOutlet="goTo; context: { $implicit: results.searchText | shortenString : 13 }"></ng-container>
     </button>
   </ng-template>
+-->
+<ng-template [ngIf]="results.txId && !results.liquidAsset.length">
+  <!-- Transaction Option -->
+  <div class="card-title" i18n="search.bitcoin-transaction">{{ networkName }} Transaction</div>
+  <a
+    [href]="'/tx/' + results.searchText"
+    [class.active]="0 === activeIdx"
+    type="button"
+    role="option"
+    class="dropdown-item"
+  >
+    Gehe zu {{ results.searchText | shortenString: 13 }}
+  </a>
+</ng-template>
+
+<ng-template [ngIf]="results.txId && !results.liquidAsset.length">
+  <!-- Block Option -->
+  <div class="card-title" i18n="search.bitcoin-block">{{ networkName }} Block</div>
+  <a
+    [href]="'/block/' + results.searchText"
+    [class.active]="1 === activeIdx"
+    type="button"
+    role="option"
+    class="dropdown-item"
+  >
+    Gehe zu {{ results.searchText | shortenString: 13 }}
+  </a>
+</ng-template>
   <ng-template [ngIf]="results.address && !results.publicKey">
     <div class="card-title" i18n="search.bitcoin-address">{{ networkName }} Address</div>
     <button (click)="clickItem(0)" [class.active]="0 === activeIdx" type="button" role="option" class="dropdown-item">
       <ng-container *ngTemplateOutlet="goTo; context: { $implicit: results.searchText | shortenString : isMobile ? 17 : 30 }"></ng-container>
     </button>
   </ng-template>
+  <!---
   <ng-template [ngIf]="results.blockHash">
     <div class="card-title" i18n="search.bitcoin-block">{{ networkName }} Block</div>
     <button (click)="clickItem(0)" [class.active]="0 === activeIdx" type="button" role="option" class="dropdown-item">
       <ng-container *ngTemplateOutlet="goTo; context: { $implicit: results.searchText | shortenString : 13 }"></ng-container>
     </button>
   </ng-template>
+-->
   <ng-template [ngIf]="results.addresses.length">
     <div class="card-title" i18n="search.bitcoin-addresses">{{ networkName }} Addresses</div>
     <ng-template ngFor [ngForOf]="results.addresses" let-address let-i="index">

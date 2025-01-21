@@ -27,10 +27,6 @@
       {
         "component": "incoming",
         "mobileOrder": 4
-      },
-      {
-        "component": "blocks",
-        "mobileOrder": 6
       }
     ]
   }
